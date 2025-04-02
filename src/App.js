@@ -7,19 +7,20 @@ const App = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [language, setLanguage] = useState('English');
+  const [error, setError] = useState('');
 
   const translations = {
     English: {
       steps: [
-        "Current Indoor Temperature (°F or °C)",
-        "What's your name?",
-        "Your ZIP Code and Address",
-        "Your Housing Type",
-        "Your Income",
-        "Cooling Options",
+        "Current Indoor Temperature",
+        "Your Name",
+        "ZIP Code and Address",
+        "Housing Type",
+        "Income Level",
+        "Cooling Devices You Use or Need",
         "Landlord Help",
-        "Would you like legal support and what can you afford?",
-        "Your Advocacy Level",
+        "Legal Support",
+        "Advocacy Level",
         "Your Personalized Cooling Plan"
       ],
       options: {
@@ -27,7 +28,7 @@ const App = () => {
         income: ["<$20,000", "$20,000–$40,000", "$40,000–$60,000", "$60,000+"],
         cooling: ["Window AC Unit", "Box Fan"],
         landlord: ["Yes – generate a letter for me", "No"],
-        advocacy: ["My individual unit/home", "My whole building", "My block", "My neighborhood", "My borough"],
+        advocacy: ["My unit", "My building", "My block", "My neighborhood", "My borough"],
         languages: ["English", "Español", "中文", "বাংলা", "Русский", "العربية", "Français", "Kreyòl Ayisyen", "한국어", "اردو"]
       },
       next: "Next",
@@ -39,11 +40,28 @@ const App = () => {
   const t = translations[language];
 
   const handleNext = () => {
+    const requiredFields = {
+      1: ['tempUnit', 'temperature'],
+      2: ['name'],
+      3: ['zip'],
+      4: ['housing'],
+      5: ['income'],
+      7: ['landlordHelp'],
+      8: ['legalHelp'],
+      9: ['advocacy']
+    };
+    const currentRequired = requiredFields[step] || [];
+    const missing = currentRequired.filter((key) => !formData[key]);
+    if (missing.length > 0) {
+      setError('Please complete all required fields.');
+      return;
+    }
+    setError('');
     setStep((s) => Math.min(s + 1, 10));
   };
 
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const generateLetter = () => {
@@ -83,67 +101,69 @@ Sincerely,
     return (
       <div id="report" style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace', marginTop: '1rem' }}>
         <h3>🔥 Heat Warning Alert</h3>
-        {temp >= 85 ? <p>🚨 Your home may be dangerously hot. NYC issues heat advisories at 85°F and above.</p> : <p>No heat warning currently based on your input.</p>}
-        
+        {temp >= 85 ? <p>🚨 Your home may be dangerously hot.</p> : <p>No heat warning based on your input.</p>}
+
         <h3>🧭 Cooling Centers</h3>
         <a href={\`https://maps.nyc.gov/cooling-center/?zip=\${zip}\`} target="_blank" rel="noreferrer">
-          View Cooling Centers Near You
+          Find Cooling Centers
         </a>
 
-        <h3>💸 Subsidy Recommendations</h3>
-        {["<$20,000", "$20,000–$40,000"].includes(formData.income) && (
-          <p>You may qualify for NYC’s <a href="https://access.nyc.gov/programs/cooling-assistance-benefit/" target="_blank">Cooling Assistance Benefit</a>.</p>
-        )}
+        <h3>💸 Subsidy Eligibility</h3>
+        {["<$20,000", "$20,000–$40,000"].includes(formData.income) ? (
+          <p>You may qualify for the <a href="https://access.nyc.gov/programs/cooling-assistance-benefit/" target="_blank">Cooling Assistance Benefit</a>.</p>
+        ) : <p>No subsidy eligibility found.</p>}
 
         <h3>🧊 Cooling Devices</h3>
-        <pre>{deviceList || "No devices selected."}</pre>
+        <pre>{deviceList || "None selected."}</pre>
 
-        <h3>✊ Advocacy Orgs</h3>
-        <pre>{orgList || "No recommendations found for your ZIP."}</pre>
+        <h3>✊ Advocacy</h3>
+        <pre>{orgList || "No recommendations found."}</pre>
 
         <h3>⚖️ Legal Help</h3>
-        <pre>{legalList || "No legal clinics found for your ZIP."}</pre>
+        <pre>{legalList || "No legal clinics found."}</pre>
 
         <h3>📄 Landlord Letter</h3>
         <pre>{generateLetter()}</pre>
 
-        <button onClick={downloadReport}>⬇️ Download This Plan</button>
+        <button onClick={downloadReport}>⬇️ Download Plan</button>
       </div>
     );
   };
 
   const renderStep = () => {
+    const inputStyle = { margin: '0.5rem 0', padding: '0.5rem', width: '100%' };
     switch (step) {
       case 1:
         return (
           <>
-            <select onChange={(e) => handleChange('tempUnit', e.target.value)}>
-              <option value="">Select Unit</option>
+            <label>Temperature Unit:</label>
+            <select style={inputStyle} onChange={(e) => handleChange('tempUnit', e.target.value)}>
+              <option value="">Select</option>
               <option value="F">Fahrenheit</option>
               <option value="C">Celsius</option>
             </select>
-            <input type="number" placeholder="Temperature" onChange={(e) => handleChange('temperature', e.target.value)} />
+            <input style={inputStyle} type="number" placeholder="Indoor temperature" onChange={(e) => handleChange('temperature', e.target.value)} />
           </>
         );
       case 2:
-        return <input placeholder="Full Name" onChange={(e) => handleChange('name', e.target.value)} />;
+        return <input style={inputStyle} placeholder="Your name" onChange={(e) => handleChange('name', e.target.value)} />;
       case 3:
         return (
           <>
-            <input placeholder="ZIP Code" onChange={(e) => handleChange('zip', e.target.value)} />
-            <input placeholder="Street Address" onChange={(e) => handleChange('address', e.target.value)} />
+            <input style={inputStyle} placeholder="ZIP Code" onChange={(e) => handleChange('zip', e.target.value)} />
+            <input style={inputStyle} placeholder="Street Address" onChange={(e) => handleChange('address', e.target.value)} />
           </>
         );
       case 4:
         return (
-          <select onChange={(e) => handleChange('housing', e.target.value)}>
+          <select style={inputStyle} onChange={(e) => handleChange('housing', e.target.value)}>
             <option value="">Select Housing Type</option>
             {t.options.housing.map(opt => <option key={opt}>{opt}</option>)}
           </select>
         );
       case 5:
         return (
-          <select onChange={(e) => handleChange('income', e.target.value)}>
+          <select style={inputStyle} onChange={(e) => handleChange('income', e.target.value)}>
             <option value="">Select Income</option>
             {t.options.income.map(opt => <option key={opt}>{opt}</option>)}
           </select>
@@ -152,21 +172,23 @@ Sincerely,
         return (
           <>
             {t.options.cooling.map(opt => (
-              <label key={opt}><input type="checkbox" onChange={(e) => handleChange(opt, e.target.checked)} /> {opt}</label>
+              <label key={opt} style={{ display: 'block', margin: '0.3rem 0' }}>
+                <input type="checkbox" onChange={(e) => handleChange(opt, e.target.checked)} /> {opt}
+              </label>
             ))}
           </>
         );
       case 7:
         return (
-          <select onChange={(e) => handleChange('landlordHelp', e.target.value)}>
-            <option value="">Do you want landlord help?</option>
+          <select style={inputStyle} onChange={(e) => handleChange('landlordHelp', e.target.value)}>
+            <option value="">Need landlord help?</option>
             {t.options.landlord.map(opt => <option key={opt}>{opt}</option>)}
           </select>
         );
       case 8:
         return (
-          <select onChange={(e) => handleChange('legalHelp', e.target.value)}>
-            <option value="">Do you want legal help?</option>
+          <select style={inputStyle} onChange={(e) => handleChange('legalHelp', e.target.value)}>
+            <option value="">Legal help options</option>
             <option>Yes – I need free legal support</option>
             <option>Yes – I can pay up to $100</option>
             <option>No</option>
@@ -174,8 +196,8 @@ Sincerely,
         );
       case 9:
         return (
-          <select onChange={(e) => handleChange('advocacy', e.target.value)}>
-            <option value="">How far do you want to advocate?</option>
+          <select style={inputStyle} onChange={(e) => handleChange('advocacy', e.target.value)}>
+            <option value="">Advocacy level</option>
             {t.options.advocacy.map(opt => <option key={opt}>{opt}</option>)}
           </select>
         );
@@ -187,17 +209,18 @@ Sincerely,
   };
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif' }}>
-      <h1>{t.steps[step - 1]}</h1>
-      <div style={{ margin: '1rem 0' }}>
-        <label>🌐 Language: </label>
-        <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+    <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif', maxWidth: 600, margin: '0 auto' }}>
+      <h2>{t.steps[step - 1]}</h2>
+      <div>
+        🌐 Language:
+        <select style={{ marginLeft: '0.5rem' }} value={language} onChange={(e) => setLanguage(e.target.value)}>
           {t.options.languages.map(l => <option key={l}>{l}</option>)}
         </select>
       </div>
-      <div>{renderStep()}</div>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <div style={{ marginTop: '1rem' }}>{renderStep()}</div>
       {step < 10 && (
-        <button style={{ marginTop: '1rem' }} onClick={handleNext}>
+        <button style={{ marginTop: '1rem', padding: '0.5rem 1rem' }} onClick={handleNext}>
           {step === 9 ? t.seePlan : t.next}
         </button>
       )}
