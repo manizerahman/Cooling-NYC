@@ -1,9 +1,4 @@
-// TaskRabbit-style UI for Cooling Quiz
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 
 const App = () => {
   const [step, setStep] = useState(1);
@@ -24,7 +19,7 @@ const App = () => {
     const currentRequired = requiredFields[step] || [];
     const missing = currentRequired.filter((key) => !formData[key]);
     if (missing.length > 0) {
-      alert(`Please complete all required fields before continuing.`);
+      alert('Please complete all required fields before continuing.');
       return;
     }
     setStep((s) => Math.min(s + 1, 10));
@@ -98,50 +93,101 @@ const App = () => {
     return plan;
   };
 
-  const stepContentStyle = "rounded-2xl p-6 bg-white shadow-xl mb-6 border border-gray-200";
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
+          <>
+            <select onChange={(e) => handleChange('tempUnit', e.target.value)}>
+              <option value="">Select Unit</option>
+              <option value="Fahrenheit">Fahrenheit (°F)</option>
+              <option value="Celsius">Celsius (°C)</option>
+            </select>
+            <input placeholder="Enter temperature" onChange={(e) => handleChange('temperature', e.target.value)} />
+          </>
+        );
+      case 2:
+        return <input placeholder="Your full name" onChange={(e) => handleChange('name', e.target.value)} />;
+      case 3:
+        return (
+          <>
+            <input placeholder="ZIP Code" onChange={(e) => handleChange('zip', e.target.value)} />
+            <input placeholder="Street Address (optional)" onChange={(e) => handleChange('address', e.target.value)} />
+          </>
+        );
+      case 4:
+        return (
+          <select onChange={(e) => handleChange('housing', e.target.value)}>
+            <option value="">Select Housing Type</option>
+            {t.options.housing.map((opt) => <option key={opt}>{opt}</option>)}
+          </select>
+        );
+      case 5:
+        return (
+          <select onChange={(e) => handleChange('income', e.target.value)}>
+            <option value="">Select Income Range</option>
+            {t.options.income.map((opt) => <option key={opt}>{opt}</option>)}
+          </select>
+        );
+      case 6:
+        return (
+          <div>
+            {t.options.cooling.map((option) => (
+              <label key={option}>
+                <input type="checkbox" onChange={(e) => handleChange(option, e.target.checked)} />
+                {option}
+              </label>
+            ))}
+          </div>
+        );
+      case 7:
+        return (
+          <select onChange={(e) => handleChange('landlordHelp', e.target.value)}>
+            <option value="">Need help contacting your landlord?</option>
+            {t.options.landlord.map((opt) => <option key={opt}>{opt}</option>)}
+          </select>
+        );
+      case 8:
+        return (
+          <select onChange={(e) => handleChange('legalHelp', e.target.value)}>
+            <option value="">Would you like legal help?</option>
+            <option>Yes – I need free legal support</option>
+            <option>Yes – I can pay up to $100</option>
+            <option>No</option>
+          </select>
+        );
+      case 9:
+        return (
+          <select onChange={(e) => handleChange('advocacy', e.target.value)}>
+            <option value="">How far do you want to advocate?</option>
+            {t.options.advocacy.map((opt) => <option key={opt}>{opt}</option>)}
+          </select>
+        );
+      case 10:
+        return (
+          <div>
+            <h2>{t.planHeading} {name}</h2>
+            <ul>
+              {generatePlan().map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div className="max-w-md mx-auto px-4 py-8 font-sans bg-gray-50 min-h-screen">
-      <div className="mb-6">
-        <label className="block text-sm font-semibold text-gray-700 mb-2">🌐 Language</label>
-        <select className="w-full p-3 border border-gray-300 rounded-lg shadow-sm" onChange={(e) => setLanguage(e.target.value)} value={language}>
-          {t.options.languages.map((lang) => (
-            <option key={lang} value={lang}>{lang}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden mb-6">
-        <div className="absolute top-0 left-0 h-full bg-green-500 transition-all duration-300" style={{ width: `${(step / 10) * 100}%` }}></div>
-      </div>
-
-      <div className={stepContentStyle}>
-        <h2 className="text-lg font-bold text-gray-800 mb-4">{t.steps[step - 1]}</h2>
-
-        {step === 10 && (
-          <div className="space-y-4">
-            <p><strong>{t.planHeading} {name}</strong></p>
-            <p>📍 ZIP Code: {zip}</p>
-            <p>📫 Address: {address}</p>
-            <p>🌡️ Indoor Temp: {temp}°{unit}</p>
-            <p>🏠 Housing: {formData.housing}</p>
-            <p>💰 Income: {income}</p>
-            <p>🧊 Cooling Options: {t.options.cooling.filter((option) => formData[option]).join(', ') || 'Not selected'}</p>
-            <p>📞 Landlord Help: {formData.landlordHelp}</p>
-            <p>⚖️ Legal Help: {formData.legalHelp}</p>
-            <p>📣 Advocacy: {formData.advocacy}</p>
-
-            <div className="mt-6">
-              <h3 className="text-md font-semibold text-gray-800 mb-2">🔍 Recommendations</h3>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                {generatePlan().map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-      </div>
+    <div style={{ padding: '2rem' }}>
+      <h1>{t.steps[step - 1]}</h1>
+      {renderStep()}
+      {step < 10 && (
+        <button onClick={handleNext} style={{ marginTop: '1rem' }}>
+          {step === 9 ? t.seePlan : t.next}
+        </button>
+      )}
     </div>
   );
 };
