@@ -1,13 +1,55 @@
+# Update the public/index.html file with TaskRabbit-style branding and modern design elements
+taskrabbit_style_html = """
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cooling Quiz</title>
+    <meta name="theme-color" content="#00b478" />
+    <meta name="description" content="NYC Cooling Quiz — Personalized climate resilience plan" />
+    <title>Cooling NYC | TaskRabbit-Style Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #f7f9fa;
+        color: #333;
+      }
+      header {
+        background-color: #00b478;
+        padding: 1rem 2rem;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      footer {
+        text-align: center;
+        font-size: 0.875rem;
+        color: #777;
+        padding: 2rem 1rem;
+      }
+    </style>
   </head>
   <body>
+    <header>
+      🌿 Cooling NYC
+    </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" style="padding: 1rem;"></div>
+    <footer>
+      Built for heat resilience in NYC • Inspired by TaskRabbit simplicity
+    </footer>
   </body>
 </html>
+"""
+
+# Write to index.html
+index_path = Path("/mnt/data/cooling-quiz/public/index.html")
+index_path.write_text(taskrabbit_style_html.strip())
+
+index_path.name
