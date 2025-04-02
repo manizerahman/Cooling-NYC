@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Window AC Unit",
+    "price": "$120\u2013$300",
+    "image": "https://images.homedepot-static.com/window-ac.jpg",
+    "storeUrl": "https://www.homedepot.com/s/window%20air%20conditioner"
+  },
+  {
+    "name": "Box Fan",
+    "price": "$20\u2013$40",
+    "image": "https://images.homedepot-static.com/box-fan.jpg",
+    "storeUrl": "https://www.homedepot.com/s/box%20fan"
+  }
+]

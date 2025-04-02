@@ -1,5 +1,3 @@
-# Update the public/index.html file with TaskRabbit-style branding and modern design elements
-taskrabbit_style_html = """
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,10 +5,7 @@ taskrabbit_style_html = """
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#00b478" />
-    <meta name="description" content="NYC Cooling Quiz — Personalized climate resilience plan" />
-    <title>Cooling NYC | TaskRabbit-Style Quiz</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Cooling NYC | Personalized Resilience Quiz</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       body {
@@ -36,20 +31,8 @@ taskrabbit_style_html = """
     </style>
   </head>
   <body>
-    <header>
-      🌿 Cooling NYC
-    </header>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <header>🌿 Cooling NYC</header>
     <div id="root" style="padding: 1rem;"></div>
-    <footer>
-      Built for heat resilience in NYC • Inspired by TaskRabbit simplicity
-    </footer>
+    <footer>Built for NYC heat resilience • Inspired by TaskRabbit</footer>
   </body>
 </html>
-"""
-
-# Write to index.html
-index_path = Path("/mnt/data/cooling-quiz/public/index.html")
-index_path.write_text(taskrabbit_style_html.strip())
-
-index_path.name
