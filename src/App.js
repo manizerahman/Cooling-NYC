@@ -25,15 +25,15 @@ const App = () => {
       ],
       options: {
         housing: ["NYCHA/Public Housing", "Private Rental", "Owner-occupied", "Shelter or Temporary Housing"],
-        income: ["<$20,000", "$20,000–$40,000", "$40,000–$60,000", "$60,000+"],
+        income: ["<$20,000", "$20,000$40,000", "$40,000$60,000", "$60,000+"],
         cooling: ["Window AC Unit", "Box Fan"],
-        landlord: ["Yes – generate a letter for me", "No"],
+        landlord: ["Yes  generate a letter for me", "No"],
         advocacy: ["My unit", "My building", "My block", "My neighborhood", "My borough"],
-        languages: ["English", "Español", "中文", "বাংলা", "Русский", "العربية", "Français", "Kreyòl Ayisyen", "한국어", "اردو"]
+        languages: ["English", "Espaol", "", "", "", "", "Franais", "Kreyl Ayisyen", "", ""]
       },
       next: "Next",
       seePlan: "See My Plan",
-      planHeading: "🌡️ Personalized Cooling Plan for"
+      planHeading: " Personalized Cooling Plan for"
     }
   };
 
@@ -69,7 +69,7 @@ const App = () => {
 Dear Landlord,
 
 I am a tenant at \${formData.address || '[address]'} (\${formData.zip}).
-Temperatures indoors have reached \${formData.temperature}°\${formData.tempUnit}.
+Temperatures indoors have reached \${formData.temperature}\${formData.tempUnit}.
 I am requesting action to provide cooling in accordance with NYC tenant law.
 
 Sincerely,
@@ -93,39 +93,39 @@ Sincerely,
     const temp = formData.temperature;
     const deviceList = coolingDevices
       .filter(d => formData[d.name])
-      .map(d => \`- \${d.name} (\${d.price}) → \${d.storeUrl}\`).join('\n');
+      .map(d => \`- \${d.name} (\${d.price})  \${d.storeUrl}\`).join('\n');
 
     const legalList = (legalClinics[zip] || []).map(c => \`- \${c}\`).join('\n');
     const orgList = (advocacyOrgs[zip] || []).map(o => \`- \${o}\`).join('\n');
 
     return (
       <div id="report" style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace', marginTop: '1rem' }}>
-        <h3>🔥 Heat Warning Alert</h3>
-        {temp >= 85 ? <p>🚨 Your home may be dangerously hot.</p> : <p>No heat warning based on your input.</p>}
+        <h3> Heat Warning Alert</h3>
+        {temp >= 85 ? <p> Your home may be dangerously hot.</p> : <p>No heat warning based on your input.</p>}
 
-        <h3>🧭 Cooling Centers</h3>
+        <h3> Cooling Centers</h3>
         <a href={\`https://maps.nyc.gov/cooling-center/?zip=\${zip}\`} target="_blank" rel="noreferrer">
           Find Cooling Centers
         </a>
 
-        <h3>💸 Subsidy Eligibility</h3>
-        {["<$20,000", "$20,000–$40,000"].includes(formData.income) ? (
+        <h3> Subsidy Eligibility</h3>
+        {["<$20,000", "$20,000$40,000"].includes(formData.income) ? (
           <p>You may qualify for the <a href="https://access.nyc.gov/programs/cooling-assistance-benefit/" target="_blank">Cooling Assistance Benefit</a>.</p>
         ) : <p>No subsidy eligibility found.</p>}
 
-        <h3>🧊 Cooling Devices</h3>
+        <h3> Cooling Devices</h3>
         <pre>{deviceList || "None selected."}</pre>
 
-        <h3>✊ Advocacy</h3>
+        <h3> Advocacy</h3>
         <pre>{orgList || "No recommendations found."}</pre>
 
-        <h3>⚖️ Legal Help</h3>
+        <h3> Legal Help</h3>
         <pre>{legalList || "No legal clinics found."}</pre>
 
-        <h3>📄 Landlord Letter</h3>
+        <h3> Landlord Letter</h3>
         <pre>{generateLetter()}</pre>
 
-        <button onClick={downloadReport}>⬇️ Download Plan</button>
+        <button onClick={downloadReport}> Download Plan</button>
       </div>
     );
   };
@@ -189,8 +189,8 @@ Sincerely,
         return (
           <select style={inputStyle} onChange={(e) => handleChange('legalHelp', e.target.value)}>
             <option value="">Legal help options</option>
-            <option>Yes – I need free legal support</option>
-            <option>Yes – I can pay up to $100</option>
+            <option>Yes  I need free legal support</option>
+            <option>Yes  I can pay up to $100</option>
             <option>No</option>
           </select>
         );
@@ -212,7 +212,7 @@ Sincerely,
     <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif', maxWidth: 600, margin: '0 auto' }}>
       <h2>{t.steps[step - 1]}</h2>
       <div>
-        🌐 Language:
+         Language:
         <select style={{ marginLeft: '0.5rem' }} value={language} onChange={(e) => setLanguage(e.target.value)}>
           {t.options.languages.map(l => <option key={l}>{l}</option>)}
         </select>
