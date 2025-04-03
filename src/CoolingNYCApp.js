@@ -59,7 +59,9 @@ const translations = {
     landlordLetterTitle: "🏢 Property Owner Compliance Notice",
     startOver: "Start Over",
     validationLanguage: "Please select a language",
+    validationName: "Please enter your name",
     validationAge: "Please enter your age",
+    validationTemperature: "Please enter the temperature",
     validationTemperatureUnit: "Please select a temperature unit",
     validationZip: "Please enter a valid 5-digit ZIP code",
     validationIncome: "Please select an income level",
@@ -134,7 +136,9 @@ const translations = {
     landlordLetterTitle: "🏢 Aviso de Cumplimiento para Propietario",
     startOver: "Comenzar de Nuevo",
     validationLanguage: "Por favor selecciona un idioma",
-    validationAge: "Por favor ingresa tu edad",
+    validationName: "Por favor ingrese su nombre",
+    validationAge: "Por favor ingrese su edad",
+    validationTemperature: "Por favor ingrese la temperatura",
     validationTemperatureUnit: "Por favor selecciona una unidad de temperatura",
     validationZip: "Por favor ingresa un código postal válido de 5 dígitos",
     validationIncome: "Por favor selecciona un nivel de ingresos",
@@ -209,7 +213,9 @@ const translations = {
     landlordLetterTitle: "🏢 业主合规通知",
     startOver: "重新开始",
     validationLanguage: "请选择一种语言",
+    validationName: "请输入您的名字",
     validationAge: "请输入您的年龄",
+    validationTemperature: "请输入温度",
     validationTemperatureUnit: "请选择温度单位",
     validationZip: "请输入有效的5位邮政编码",
     validationIncome: "请选择收入水平",
@@ -284,7 +290,9 @@ const translations = {
     landlordLetterTitle: "🏢 সম্পত্তি মালিক অনুবর্তিতা বিজ্ঞপ্তি",
     startOver: "আবার শুরু করুন",
     validationLanguage: "অনুগ্রহ করে একটি ভাষা নির্বাচন করুন",
+    validationName: "অনুগ্রহ করে আপনার নাম লিখুন",
     validationAge: "অনুগ্রহ করে আপনার বয়স লিখুন",
+    validationTemperature: "অনুগ্রহ করে তাপমাত্রা লিখুন",
     validationTemperatureUnit: "অনুগ্রহ করে একটি তাপমাত্রা একক নির্বাচন করুন",
     validationZip: "অনুগ্রহ করে একটি বৈধ 5-সংখ্যার জিপ কোড লিখুন",
     validationIncome: "অনুগ্রহ করে একটি আয়ের স্তর নির্বাচন করুন",
@@ -359,7 +367,9 @@ const translations = {
     landlordLetterTitle: "🏢 Уведомление о соответствии для владельца недвижимости",
     startOver: "Начать заново",
     validationLanguage: "Пожалуйста, выберите язык",
+    validationName: "Пожалуйста, введите ваше имя",
     validationAge: "Пожалуйста, введите ваш возраст",
+    validationTemperature: "Пожалуйста, введите температуру",
     validationTemperatureUnit: "Пожалуйста, выберите единицу измерения температуры",
     validationZip: "Пожалуйста, введите действительный 5-значный почтовый индекс",
     validationIncome: "Пожалуйста, выберите уровень дохода",
@@ -462,13 +472,19 @@ const CoolingNYCApp = () => {
     if (step === 0 && !formData.language) {
       setValidationError(translate("validationLanguage"));
       return;
+    } else if (step === 1 && !formData.name) {
+      setValidationError(translate("validationName"));
+      return;
     } else if (step === 2 && !formData.age) {
       setValidationError(translate("validationAge"));
       return;
-    } else if (step === 3 && formData.temperature && !formData.temperatureUnit) {
+    } else if (step === 3 && !formData.temperature) {
+      setValidationError(translate("validationTemperature"));
+      return;
+    } else if (step === 3 && !formData.temperatureUnit) {
       setValidationError(translate("validationTemperatureUnit"));
       return;
-    } else if (step === 4 && formData.zip && !isValidZip(formData.zip)) {
+    } else if (step === 4 && (!formData.zip || !isValidZip(formData.zip))) {
       setValidationError(translate("validationZip"));
       return;
     } else if (step === 5 && !formData.income) {
@@ -699,21 +715,6 @@ const CoolingNYCApp = () => {
     <FinalPlan key="final" formData={formData} resourceData={resourceData} isLoading={isLoading} error={error} />
   ];
 
-  // Add restart button to all steps
-  const stepsWithRestart = steps.map((stepContent, index) => {
-    return (
-      <div key={`step-${index}`} className="relative">
-        {stepContent}
-        <button 
-          className="absolute top-2 right-2 px-3 py-1.5 text-sm bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg transform transition hover:scale-105 flex items-center font-medium"
-          onClick={() => window.location.reload()}
-        >
-          <span className="mr-1">↺</span> {translate("restart")}
-        </button>
-      </div>
-    );
-  });
-
   return (
     <div className="max-w-2xl mx-auto p-6 min-h-screen bg-gradient-to-b from-[#014421] to-[#013017] text-white">
       <h2 className="text-center text-3xl font-bold mb-6 text-shadow">{translate("coolingNYCTitle")}</h2>
@@ -728,11 +729,11 @@ const CoolingNYCApp = () => {
       
       {/* Current step */}
       <div className="bg-green-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10">
-        {stepsWithRestart[step]}
+        {steps[step]}
       </div>
       
       {/* Navigation buttons */}
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between mt-8 items-center">
         {step > 0 && (
           <button 
             className="px-6 py-3 bg-white text-green-800 rounded-full hover:bg-gray-200 transition shadow-lg font-medium" 
@@ -742,9 +743,16 @@ const CoolingNYCApp = () => {
           </button>
         )}
         
+        <button 
+          className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg font-medium flex items-center mx-2"
+          onClick={() => window.location.reload()}
+        >
+          <span className="mr-1">↺</span> {translate("restart")}
+        </button>
+        
         {step < steps.length - 1 && (
           <button 
-            className="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition ml-auto shadow-lg font-medium" 
+            className="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition shadow-lg font-medium" 
             onClick={nextStep}
           >
             {translate("next")}
@@ -1054,16 +1062,6 @@ ${name || "Resident"}`}
           />
         </div>
       )}
-      
-      {/* Start Over Button */}
-      <div className="mt-8 flex justify-center">
-        <button 
-          className="px-8 py-3 bg-white text-green-800 rounded-full font-bold hover:bg-gray-200 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          onClick={() => window.location.reload()}
-        >
-          {translate("startOver")}
-        </button>
-      </div>
     </div>
   );
 }
