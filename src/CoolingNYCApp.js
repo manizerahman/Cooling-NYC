@@ -41,12 +41,15 @@ const CoolingNYCApp = () => {
         <h2 className="text-2xl font-bold text-white">{title}</h2>
         <input
           type={type}
-          className="w-full p-3 rounded-full bg-white text-black"
+          className="w-full p-3 rounded-full bg-white text-black placeholder-gray-400"
+          value={formData[field] || ""}
           onChange={e => handleChange(field, e.target.value)}
+          placeholder="Type your answer here..."
         />
         {withUnit && (
           <select
             className="w-full p-3 rounded-full bg-white text-black"
+            value={formData[fieldUnit] || ""}
             onChange={e => handleChange(fieldUnit, e.target.value)}
           >
             <option value="">Unit</option>
@@ -64,17 +67,20 @@ const CoolingNYCApp = () => {
         <h2 className="text-2xl font-bold text-white">{title}</h2>
         <select
           className="w-full p-3 rounded-full bg-white text-black"
+          value={formData[field] || ""}
           onChange={e => handleChange(field, e.target.value)}
         >
           <option value="">Select an option</option>
-          {options.map(opt => <option key={opt}>{opt}</option>)}
+          {options.map(opt => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
         </select>
       </div>
     );
   }
 
   function FinalPlan({ formData, data }) {
-    const { name, zip, temperature, temperatureUnit, income, address, legalHelp, landlordHelp, advocacyLevel } = formData;
+    const { name, zip, temperature, temperatureUnit, income, address, legalHelp, landlordHelp } = formData;
     const centers = data.centers?.[zip] || ["No data available"];
     const retailers = data.retailers?.[zip] || ["No local retailers found"];
     const clinics = data.legal?.[zip] || ["No legal clinics found"];
@@ -119,7 +125,12 @@ const CoolingNYCApp = () => {
               className="w-full p-4 text-black bg-gray-100"
               rows={6}
               readOnly
-              value={`Dear Legal Team,\n\nI am requesting ${legalHelp} support for unsafe heat conditions at ${address || "[Your Address]"}, ZIP ${zip}.\n\nSincerely,\n${name}`}
+              value={`Dear Legal Team,
+
+I am requesting ${legalHelp} support for unsafe heat conditions at ${address || "[Your Address]"}, ZIP ${zip}.
+
+Sincerely,
+${name}`}
             />
           </div>
         )}
@@ -131,7 +142,12 @@ const CoolingNYCApp = () => {
               className="w-full p-4 text-black bg-gray-100"
               rows={6}
               readOnly
-              value={`Dear Landlord,\n\nIndoor temperature at ${address || "[Your Address]"}, ZIP ${zip} is unsafe. Please provide cooling or respond within 48 hours.\n\nSincerely,\n${name}`}
+              value={`Dear Landlord,
+
+Indoor temperature at ${address || "[Your Address]"}, ZIP ${zip} is unsafe. Please provide cooling or respond within 48 hours.
+
+Sincerely,
+${name}`}
             />
           </div>
         )}
