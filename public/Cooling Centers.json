@@ -1,0 +1,285 @@
+{
+  "10001": [
+    {
+      "name": "Hudson Guild",
+      "address": "441 W 26th St, New York, NY 10001",
+      "contact": "212-760-9800"
+    },
+    {
+      "name": "Penn South Program for Seniors",
+      "address": "290 9th Ave, New York, NY 10001",
+      "contact": "212-243-3670"
+    }
+  ],
+  "10002": [
+    {
+      "name": "Henry Street Settlement",
+      "address": "334 Madison St, New York, NY 10002",
+      "contact": "212-349-2770"
+    }
+  ],
+  "10003": [
+    {
+      "name": "14th Street Y",
+      "address": "344 E 14th St, New York, NY 10003",
+      "contact": "212-780-0800"
+    }
+  ],
+  "10004": [],
+  "10005": [],
+  "10006": [],
+  "10007": [
+    {
+      "name": "Borough of Manhattan Community College",
+      "address": "199 Chambers St, New York, NY 10007",
+      "contact": "212-220-8000"
+    }
+  ],
+  "10008": [],
+  "10009": [
+    {
+      "name": "Tompkins Square Branch Library",
+      "address": "331 E 10th St, New York, NY 10009",
+      "contact": "212-228-4747"
+    }
+  ],
+  "10010": [
+    {
+      "name": "Sirovich Center for Balanced Living",
+      "address": "331 E 12th St, New York, NY 10003",
+      "contact": "212-228-7836"
+    }
+  ]
+}
+{
+  "10011": [
+    {
+      "name": "Hudson Guild Elliott Center",
+      "address": "441 W 26th St, New York, NY 10011",
+      "contact": "212-760-9800"
+    }
+  ],
+  "10012": [
+    {
+      "name": "Mulberry Street Library",
+      "address": "10 Jersey St, New York, NY 10012",
+      "contact": "212-966-3424"
+    }
+  ],
+  "10013": [
+    {
+      "name": "Chinatown YMCA",
+      "address": "273 Bowery, New York, NY 10013",
+      "contact": "212-912-2460"
+    }
+  ],
+  "10014": [
+    {
+      "name": "Hudson Park Library",
+      "address": "66 Leroy St, New York, NY 10014",
+      "contact": "212-243-6876"
+    }
+  ],
+  "10015": [],
+  "10016": [
+    {
+      "name": "Epiphany Library",
+      "address": "228 E 23rd St, New York, NY 10016",
+      "contact": "212-679-2645"
+    }
+  ],
+  "10017": [
+    {
+      "name": "Grand Central Library",
+      "address": "135 E 46th St, New York, NY 10017",
+      "contact": "212-621-0670"
+    }
+  ],
+  "10018": [],
+  "10019": [
+    {
+      "name": "Al Hirschfeld Library",
+      "address": "58th St & 10th Ave, New York, NY 10019",
+      "contact": "212-245-5445"
+    }
+  ],
+  "10020": []
+}
+{
+  "10021": [
+    {
+      "name": "67th Street Library",
+      "address": "328 E 67th St, New York, NY 10021",
+      "contact": "212-734-1717"
+    }
+  ],
+  "10022": [
+    {
+      "name": "Epiphany Branch Library",
+      "address": "228 E 23rd St, New York, NY 10022",
+      "contact": "212-679-2645"
+    }
+  ],
+  "10023": [
+    {
+      "name": "Library for the Performing Arts",
+      "address": "40 Lincoln Center Plaza, New York, NY 10023",
+      "contact": "212-870-1630"
+    }
+  ],
+  "10024": [
+    {
+      "name": "St. Agnes Library",
+      "address": "444 Amsterdam Ave, New York, NY 10024",
+      "contact": "212-621-0619"
+    }
+  ],
+  "10025": [
+    {
+      "name": "Bloomingdale Library",
+      "address": "150 W 100th St, New York, NY 10025",
+      "contact": "212-222-8030"
+    }
+  ],
+  "10026": [],
+  "10027": [
+    {
+      "name": "Harlem Library",
+      "address": "9 W 124th St, New York, NY 10027",
+      "contact": "212-348-5620"
+    }
+  ],
+  "10028": [
+    {
+      "name": "96th Street Library",
+      "address": "112 E 96th St, New York, NY 10028",
+      "contact": "212-289-0908"
+    }
+  ],
+  "10029": [
+    {
+      "name": "Aguilar Library",
+      "address": "174 E 110th St, New York, NY 10029",
+      "contact": "212-534-2930"
+    }
+  ],
+  "10030": [
+    {
+      "name": "Hamilton Grange Library",
+      "address": "503 W 145th St, New York, NY 10030",
+      "contact": "212-926-2147"
+    }
+  ]
+}
+{
+  "10031": [
+    {
+      "name": "Hamilton Grange Library",
+      "address": "503 W 145th St, New York, NY 10031",
+      "contact": "212-926-2147"
+    }
+  ],
+  "10032": [
+    {
+      "name": "Washington Heights Library",
+      "address": "1000 St Nicholas Ave, New York, NY 10032",
+      "contact": "212-923-6054"
+    }
+  ],
+  "10033": [
+    {
+      "name": "Fort Washington Library",
+      "address": "535 W 179th St, New York, NY 10033",
+      "contact": "212-927-3533"
+    }
+  ],
+  "10034": [
+    {
+      "name": "Inwood Library",
+      "address": "4790 Broadway, New York, NY 10034",
+      "contact": "212-942-2445"
+    }
+  ],
+  "10035": [
+    {
+      "name": "125th Street Library",
+      "address": "224 E 125th St, New York, NY 10035",
+      "contact": "212-534-5050"
+    }
+  ],
+  "10036": [
+    {
+      "name": "Mid-Manhattan Library",
+      "address": "455 5th Ave, New York, NY 10036",
+      "contact": "917-275-6975"
+    }
+  ],
+  "10037": [
+    {
+      "name": "Countee Cullen Library",
+      "address": "104 W 136th St, New York, NY 10037",
+      "contact": "212-491-2070"
+    }
+  ],
+  "10038": [
+    {
+      "name": "Seward Park Library",
+      "address": "192 E Broadway, New York, NY 10038",
+      "contact": "212-477-6770"
+    }
+  ],
+  "10039": [
+    {
+      "name": "George Bruce Library",
+      "address": "518 W 125th St, New York, NY 10039",
+      "contact": "212-662-9727"
+    }
+  ],
+  "10040": [
+    {
+      "name": "Marble Hill Library",
+      "address": "536 W 225th St, New York, NY 10040",
+      "contact": "212-942-2445"
+    }
+  ]
+}
+{
+  "10041": [],
+  "10044": [
+    {
+      "name": "Roosevelt Island Library",
+      "address": "504 Main St, New York, NY 10044",
+      "contact": "212-308-6243"
+    }
+  ],
+  "10065": [
+    {
+      "name": "67th Street Library",
+      "address": "328 E 67th St, New York, NY 10065",
+      "contact": "212-734-1717"
+    }
+  ],
+  "10069": [],
+  "10075": [
+    {
+      "name": "Yorkville Library",
+      "address": "222 E 79th St, New York, NY 10075",
+      "contact": "212-744-5824"
+    }
+  ],
+  "10128": [
+    {
+      "name": "96th Street Library",
+      "address": "112 E 96th St, New York, NY 10128",
+      "contact": "212-289-0908"
+    }
+  ],
+  "10280": [],
+  "10282": [
+    {
+      "name": "Battery Park City Library",
+      "address": "175 North End Ave, New York, NY 10282",
+      "contact": "212-790-3499"
+    }
+  ]
+}

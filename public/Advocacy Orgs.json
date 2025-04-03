@@ -1,0 +1,37 @@
+{
+  "10026": [
+    {
+      "name": "WE ACT for Environmental Justice",
+      "description": "Advocates for environmental health and justice in Northern Manhattan.",
+      "website": "https://www.weact.org"
+    }
+  ],
+  "10029": [
+    {
+      "name": "East Harlem COAD",
+      "description": "Coordinates local emergency preparedness and advocacy in East Harlem.",
+      "website": "https://www.eastharlemcoad.org"
+    }
+  ],
+  "10031": [
+    {
+      "name": "Manhattan Together",
+      "description": "Faith-based organizing network focused on housing and safety in Manhattan neighborhoods.",
+      "website": "https://www.metro-iaf.org"
+    }
+  ],
+  "10025": [
+    {
+      "name": "The People's Climate Movement NYC",
+      "description": "Community-led climate justice and advocacy campaigns in NYC.",
+      "website": "https://www.peoplesclimate.org"
+    }
+  ],
+  "10001": [
+    {
+      "name": "NY Environmental Justice Alliance",
+      "description": "Coordinates citywide environmental justice advocacy including in Manhattan.",
+      "website": "https://www.nyc-eja.org"
+    }
+  ]
+}

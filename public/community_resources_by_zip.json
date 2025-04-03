@@ -1,0 +1,980 @@
+{
+  "10001": {
+    "Cooling Centers": [
+      {
+        "name": "Hudson Guild",
+        "address": "441 W 26th St, New York, NY 10001",
+        "phone": "212-760-9800"
+      },
+      {
+        "name": "Penn South Program for Seniors",
+        "address": "290 9th Ave, New York, NY 10001",
+        "phone": "212-243-3670"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [
+      {
+        "name": "WE ACT for Environmental Justice",
+        "website": "https://www.weact.org"
+      },
+      {
+        "name": "East Harlem COAD",
+        "website": "https://www.eastharlemcoad.org"
+      },
+      {
+        "name": "Manhattan Together",
+        "website": "https://www.metro-iaf.org"
+      },
+      {
+        "name": "The People's Climate Movement NYC",
+        "website": "https://www.peoplesclimate.org"
+      },
+      {
+        "name": "NY Environmental Justice Alliance",
+        "website": "https://www.nyc-eja.org"
+      }
+    ],
+    "Retailers": [
+      {
+        "name": "P.C. Richard & Son",
+        "address": "53 W 23rd St, New York, NY 10001",
+        "phone": "(212) 924-0200"
+      }
+    ]
+  },
+  "10002": {
+    "Cooling Centers": [
+      {
+        "name": "Henry Street Settlement",
+        "address": "334 Madison St, New York, NY 10002",
+        "phone": "212-349-2770"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "B & H Air Conditioning",
+        "address": "84 Eldridge St, New York, NY 10002",
+        "phone": "(212) 226-9062"
+      }
+    ]
+  },
+  "10003": {
+    "Cooling Centers": [
+      {
+        "name": "14th Street Y",
+        "address": "344 E 14th St, New York, NY 10003",
+        "phone": "212-780-0800"
+      },
+      {
+        "name": "Sirovich Center for Balanced Living",
+        "address": "331 E 12th St, New York, NY 10003",
+        "phone": "212-228-7836"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Best Buy Union Square",
+        "address": "52 E 14th St, New York, NY 10003",
+        "phone": "(212) 466-4789"
+      }
+    ]
+  },
+  "10007": {
+    "Cooling Centers": [
+      {
+        "name": "Borough of Manhattan Community College",
+        "address": "199 Chambers St, New York, NY 10007",
+        "phone": "212-220-8000"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": []
+  },
+  "10009": {
+    "Cooling Centers": [
+      {
+        "name": "Tompkins Square Branch Library",
+        "address": "331 E 10th St, New York, NY 10009",
+        "phone": "212-228-4747"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Target",
+        "address": "500 E 14th St, New York, NY 10009",
+        "phone": "(917) 994-3522"
+      }
+    ]
+  },
+  "10011": {
+    "Cooling Centers": [
+      {
+        "name": "Hudson Guild Elliott Center",
+        "address": "441 W 26th St, New York, NY 10011",
+        "phone": "212-760-9800"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Just Air NYC",
+        "address": "245 W 29th St, New York, NY 10011",
+        "phone": "(212) 555-0199"
+      },
+      {
+        "name": "Chelsea Appliance",
+        "address": "134 9th Ave, New York, NY 10011",
+        "phone": "(212) 555-2020"
+      }
+    ]
+  },
+  "10012": {
+    "Cooling Centers": [
+      {
+        "name": "Mulberry Street Library",
+        "address": "10 Jersey St, New York, NY 10012",
+        "phone": "212-966-3424"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Village Appliance",
+        "address": "175 Bleecker St, New York, NY 10012",
+        "phone": "(212) 555-3030"
+      }
+    ]
+  },
+  "10013": {
+    "Cooling Centers": [
+      {
+        "name": "Chinatown YMCA",
+        "address": "273 Bowery, New York, NY 10013",
+        "phone": "212-912-2460"
+      }
+    ],
+    "Legal Aid Clinics": [
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Midtown",
+        "address": "60 Lafayette St, New York, NY 10013",
+        "phone": "(212) 577-3300",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      },
+      {
+        "name": "Housing Court Answers",
+        "address": "111 Centre St, New York, NY 10013",
+        "phone": "(212) 962-4795",
+        "website": "https://housingcourtanswers.org"
+      }
+    ],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Chinatown Electronics",
+        "address": "102 Canal St, New York, NY 10013",
+        "phone": "(212) 555-4040"
+      }
+    ]
+  },
+  "10014": {
+    "Cooling Centers": [
+      {
+        "name": "Hudson Park Library",
+        "address": "66 Leroy St, New York, NY 10014",
+        "phone": "212-243-6876"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Westside Hardware",
+        "address": "241 W 10th St, New York, NY 10014",
+        "phone": "(212) 555-5050"
+      }
+    ]
+  },
+  "10016": {
+    "Cooling Centers": [
+      {
+        "name": "Epiphany Library",
+        "address": "228 E 23rd St, New York, NY 10016",
+        "phone": "212-679-2645"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Murray Hill Hardware",
+        "address": "591 2nd Ave, New York, NY 10016",
+        "phone": "(212) 555-6060"
+      }
+    ]
+  },
+  "10017": {
+    "Cooling Centers": [
+      {
+        "name": "Grand Central Library",
+        "address": "135 E 46th St, New York, NY 10017",
+        "phone": "212-621-0670"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "East Side Electronics",
+        "address": "212 E 43rd St, New York, NY 10017",
+        "phone": "(212) 555-7070"
+      }
+    ]
+  },
+  "10019": {
+    "Cooling Centers": [
+      {
+        "name": "Al Hirschfeld Library",
+        "address": "58th St & 10th Ave, New York, NY 10019",
+        "phone": "212-245-5445"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Appliance Plus NYC",
+        "address": "888 10th Ave, New York, NY 10019",
+        "phone": "(212) 555-9090"
+      }
+    ]
+  },
+  "10021": {
+    "Cooling Centers": [
+      {
+        "name": "67th Street Library",
+        "address": "328 E 67th St, New York, NY 10021",
+        "phone": "212-734-1717"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Upper East Hardware",
+        "address": "1583 2nd Ave, New York, NY 10021",
+        "phone": "(212) 555-1010"
+      }
+    ]
+  },
+  "10022": {
+    "Cooling Centers": [
+      {
+        "name": "Epiphany Branch Library",
+        "address": "228 E 23rd St, New York, NY 10022",
+        "phone": "212-679-2645"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Lexington Ave Hardware",
+        "address": "875 Lexington Ave, New York, NY 10022",
+        "phone": "(212) 555-1111"
+      }
+    ]
+  },
+  "10023": {
+    "Cooling Centers": [
+      {
+        "name": "Library for the Performing Arts",
+        "address": "40 Lincoln Center Plaza, New York, NY 10023",
+        "phone": "212-870-1630"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "West Side Appliance",
+        "address": "2025 Broadway, New York, NY 10023",
+        "phone": "(212) 555-1212"
+      }
+    ]
+  },
+  "10024": {
+    "Cooling Centers": [
+      {
+        "name": "St. Agnes Library",
+        "address": "444 Amsterdam Ave, New York, NY 10024",
+        "phone": "212-621-0619"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Columbus Hardware & Housewares",
+        "address": "805 Columbus Ave, New York, NY 10024",
+        "phone": "(212) 555-1313"
+      }
+    ]
+  },
+  "10025": {
+    "Cooling Centers": [
+      {
+        "name": "Bloomingdale Library",
+        "address": "150 W 100th St, New York, NY 10025",
+        "phone": "212-222-8030"
+      }
+    ],
+    "Legal Aid Clinics": [
+      {
+        "name": "Uptown Legal Services",
+        "address": "215 W 114th St, New York, NY 10025",
+        "phone": "(212) 222-9939",
+        "website": "https://www.legalservicesnyc.org"
+      },
+      {
+        "name": "Uptown Legal Services",
+        "address": "215 W 114th St, New York, NY 10025",
+        "phone": "(212) 222-9939",
+        "website": "https://www.legalservicesnyc.org"
+      },
+      {
+        "name": "Uptown Legal Services",
+        "address": "215 W 114th St, New York, NY 10025",
+        "phone": "(212) 222-9939",
+        "website": "https://www.legalservicesnyc.org"
+      },
+      {
+        "name": "Uptown Legal Services",
+        "address": "215 W 114th St, New York, NY 10025",
+        "phone": "(212) 222-9939",
+        "website": "https://www.legalservicesnyc.org"
+      }
+    ],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Hardware & Bath NYC",
+        "address": "2568 Broadway, New York, NY 10025",
+        "phone": "(212) 555-1414"
+      }
+    ]
+  },
+  "10027": {
+    "Cooling Centers": [
+      {
+        "name": "Harlem Library",
+        "address": "9 W 124th St, New York, NY 10027",
+        "phone": "212-348-5620"
+      }
+    ],
+    "Legal Aid Clinics": [
+      {
+        "name": "Legal Aid Society \u2013 Harlem",
+        "address": "2090 Adam Clayton Powell Jr Blvd, New York, NY 10027",
+        "phone": "(212) 426-3000",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Harlem",
+        "address": "2090 Adam Clayton Powell Jr Blvd, New York, NY 10027",
+        "phone": "(212) 426-3000",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Harlem",
+        "address": "2090 Adam Clayton Powell Jr Blvd, New York, NY 10027",
+        "phone": "(212) 426-3000",
+        "website": "https://www.legalaidnyc.org"
+      },
+      {
+        "name": "Legal Aid Society \u2013 Harlem",
+        "address": "2090 Adam Clayton Powell Jr Blvd, New York, NY 10027",
+        "phone": "(212) 426-3000",
+        "website": "https://www.legalaidnyc.org"
+      }
+    ],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Harlem HVAC Supply",
+        "address": "3051 Broadway, New York, NY 10027",
+        "phone": "(212) 555-1616"
+      }
+    ]
+  },
+  "10028": {
+    "Cooling Centers": [
+      {
+        "name": "96th Street Library",
+        "address": "112 E 96th St, New York, NY 10028",
+        "phone": "212-289-0908"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "East Side Electronics",
+        "address": "1536 3rd Ave, New York, NY 10028",
+        "phone": "(212) 555-1717"
+      }
+    ]
+  },
+  "10029": {
+    "Cooling Centers": [
+      {
+        "name": "Aguilar Library",
+        "address": "174 E 110th St, New York, NY 10029",
+        "phone": "212-534-2930"
+      }
+    ],
+    "Legal Aid Clinics": [
+      {
+        "name": "East Harlem Community Law Office",
+        "address": "237 E 104th St, New York, NY 10029",
+        "phone": "(212) 876-5500",
+        "website": "https://www.mfy.org"
+      },
+      {
+        "name": "East Harlem Community Law Office",
+        "address": "237 E 104th St, New York, NY 10029",
+        "phone": "(212) 876-5500",
+        "website": "https://www.mfy.org"
+      },
+      {
+        "name": "East Harlem Community Law Office",
+        "address": "237 E 104th St, New York, NY 10029",
+        "phone": "(212) 876-5500",
+        "website": "https://www.mfy.org"
+      },
+      {
+        "name": "East Harlem Community Law Office",
+        "address": "237 E 104th St, New York, NY 10029",
+        "phone": "(212) 876-5500",
+        "website": "https://www.mfy.org"
+      },
+      {
+        "name": "East Harlem Community Law Office",
+        "address": "237 E 104th St, New York, NY 10029",
+        "phone": "(212) 876-5500",
+        "website": "https://www.mfy.org"
+      }
+    ],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "El Barrio Hardware",
+        "address": "2141 2nd Ave, New York, NY 10029",
+        "phone": "(212) 555-1818"
+      }
+    ]
+  },
+  "10030": {
+    "Cooling Centers": [
+      {
+        "name": "Hamilton Grange Library",
+        "address": "503 W 145th St, New York, NY 10030",
+        "phone": "212-926-2147"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Hamilton Heating & Cooling",
+        "address": "240 W 145th St, New York, NY 10030",
+        "phone": "(212) 555-1919"
+      }
+    ]
+  },
+  "10031": {
+    "Cooling Centers": [
+      {
+        "name": "Hamilton Grange Library",
+        "address": "503 W 145th St, New York, NY 10031",
+        "phone": "212-926-2147"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Broadway HVAC Supply",
+        "address": "4301 Broadway, New York, NY 10031",
+        "phone": "(212) 555-2021"
+      }
+    ]
+  },
+  "10032": {
+    "Cooling Centers": [
+      {
+        "name": "Washington Heights Library",
+        "address": "1000 St Nicholas Ave, New York, NY 10032",
+        "phone": "212-923-6054"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Uptown Hardware",
+        "address": "609 W 181st St, New York, NY 10032",
+        "phone": "(212) 555-2121"
+      }
+    ]
+  },
+  "10033": {
+    "Cooling Centers": [
+      {
+        "name": "Fort Washington Library",
+        "address": "535 W 179th St, New York, NY 10033",
+        "phone": "212-927-3533"
+      }
+    ],
+    "Legal Aid Clinics": [
+      {
+        "name": "NMIC Legal Services",
+        "address": "45 Wadsworth Ave, New York, NY 10033",
+        "phone": "(212) 822-8300",
+        "website": "https://www.nmic.org"
+      },
+      {
+        "name": "NMIC Legal Services",
+        "address": "45 Wadsworth Ave, New York, NY 10033",
+        "phone": "(212) 822-8300",
+        "website": "https://www.nmic.org"
+      },
+      {
+        "name": "NMIC Legal Services",
+        "address": "45 Wadsworth Ave, New York, NY 10033",
+        "phone": "(212) 822-8300",
+        "website": "https://www.nmic.org"
+      },
+      {
+        "name": "NMIC Legal Services",
+        "address": "45 Wadsworth Ave, New York, NY 10033",
+        "phone": "(212) 822-8300",
+        "website": "https://www.nmic.org"
+      },
+      {
+        "name": "NMIC Legal Services",
+        "address": "45 Wadsworth Ave, New York, NY 10033",
+        "phone": "(212) 822-8300",
+        "website": "https://www.nmic.org"
+      }
+    ],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Washington Heights Cooling",
+        "address": "400 W 162nd St, New York, NY 10033",
+        "phone": "(212) 555-2222"
+      }
+    ]
+  },
+  "10034": {
+    "Cooling Centers": [
+      {
+        "name": "Inwood Library",
+        "address": "4790 Broadway, New York, NY 10034",
+        "phone": "212-942-2445"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Inwood Home Supply",
+        "address": "90 Vermilyea Ave, New York, NY 10034",
+        "phone": "(212) 555-2323"
+      }
+    ]
+  },
+  "10035": {
+    "Cooling Centers": [
+      {
+        "name": "125th Street Library",
+        "address": "224 E 125th St, New York, NY 10035",
+        "phone": "212-534-5050"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "East Harlem Appliances",
+        "address": "213 E 120th St, New York, NY 10035",
+        "phone": "(212) 555-2424"
+      }
+    ]
+  },
+  "10036": {
+    "Cooling Centers": [
+      {
+        "name": "Mid-Manhattan Library",
+        "address": "455 5th Ave, New York, NY 10036",
+        "phone": "917-275-6975"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Midtown Cooling Supplies",
+        "address": "601 10th Ave, New York, NY 10036",
+        "phone": "(212) 555-2525"
+      }
+    ]
+  },
+  "10037": {
+    "Cooling Centers": [
+      {
+        "name": "Countee Cullen Library",
+        "address": "104 W 136th St, New York, NY 10037",
+        "phone": "212-491-2070"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Strivers Row Cooling",
+        "address": "271 W 135th St, New York, NY 10037",
+        "phone": "(212) 555-2626"
+      }
+    ]
+  },
+  "10038": {
+    "Cooling Centers": [
+      {
+        "name": "Seward Park Library",
+        "address": "192 E Broadway, New York, NY 10038",
+        "phone": "212-477-6770"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Seaport Hardware",
+        "address": "235 Water St, New York, NY 10038",
+        "phone": "(212) 555-2727"
+      }
+    ]
+  },
+  "10039": {
+    "Cooling Centers": [
+      {
+        "name": "George Bruce Library",
+        "address": "518 W 125th St, New York, NY 10039",
+        "phone": "212-662-9727"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Edgecombe Cooling Depot",
+        "address": "315 Edgecombe Ave, New York, NY 10039",
+        "phone": "(212) 555-2828"
+      }
+    ]
+  },
+  "10040": {
+    "Cooling Centers": [
+      {
+        "name": "Marble Hill Library",
+        "address": "536 W 225th St, New York, NY 10040",
+        "phone": "212-942-2445"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Broadway Appliance Co",
+        "address": "5025 Broadway, New York, NY 10040",
+        "phone": "(212) 555-2929"
+      }
+    ]
+  },
+  "10044": {
+    "Cooling Centers": [
+      {
+        "name": "Roosevelt Island Library",
+        "address": "504 Main St, New York, NY 10044",
+        "phone": "212-308-6243"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Roosevelt Island Hardware",
+        "address": "686 Main St, New York, NY 10044",
+        "phone": "(212) 555-3030"
+      }
+    ]
+  },
+  "10065": {
+    "Cooling Centers": [
+      {
+        "name": "67th Street Library",
+        "address": "328 E 67th St, New York, NY 10065",
+        "phone": "212-734-1717"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Third Avenue Hardware",
+        "address": "1213 3rd Ave, New York, NY 10065",
+        "phone": "(212) 555-3131"
+      }
+    ]
+  },
+  "10075": {
+    "Cooling Centers": [
+      {
+        "name": "Yorkville Library",
+        "address": "222 E 79th St, New York, NY 10075",
+        "phone": "212-744-5824"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "East 79th Street Hardware",
+        "address": "222 E 79th St, New York, NY 10075",
+        "phone": "(212) 555-3232"
+      }
+    ]
+  },
+  "10128": {
+    "Cooling Centers": [
+      {
+        "name": "96th Street Library",
+        "address": "112 E 96th St, New York, NY 10128",
+        "phone": "212-289-0908"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Upper East Cooling Supply",
+        "address": "1623 2nd Ave, New York, NY 10128",
+        "phone": "(212) 555-3333"
+      }
+    ]
+  },
+  "10282": {
+    "Cooling Centers": [
+      {
+        "name": "Battery Park City Library",
+        "address": "175 North End Ave, New York, NY 10282",
+        "phone": "212-790-3499"
+      }
+    ],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Battery Park Hardware",
+        "address": "325 North End Ave, New York, NY 10282",
+        "phone": "(212) 555-3434"
+      }
+    ]
+  },
+  "10004": {
+    "Cooling Centers": [],
+    "Legal Aid Clinics": [
+      {
+        "name": "NYLAG LegalHealth",
+        "address": "7 Hanover Square, New York, NY 10004",
+        "phone": "(212) 613-5000",
+        "website": "https://www.nylag.org"
+      },
+      {
+        "name": "NYLAG LegalHealth",
+        "address": "7 Hanover Square, New York, NY 10004",
+        "phone": "(212) 613-5000",
+        "website": "https://www.nylag.org"
+      },
+      {
+        "name": "NYLAG LegalHealth",
+        "address": "7 Hanover Square, New York, NY 10004",
+        "phone": "(212) 613-5000",
+        "website": "https://www.nylag.org"
+      },
+      {
+        "name": "NYLAG LegalHealth",
+        "address": "7 Hanover Square, New York, NY 10004",
+        "phone": "(212) 613-5000",
+        "website": "https://www.nylag.org"
+      },
+      {
+        "name": "NYLAG LegalHealth",
+        "address": "7 Hanover Square, New York, NY 10004",
+        "phone": "(212) 613-5000",
+        "website": "https://www.nylag.org"
+      }
+    ],
+    "Advocacy Organizations": [],
+    "Retailers": []
+  },
+  "10010": {
+    "Cooling Centers": [],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "P.C. Richard & Son",
+        "address": "40 E 14th St, New York, NY 10010",
+        "phone": "(212) 924-0200"
+      }
+    ]
+  },
+  "10018": {
+    "Cooling Centers": [],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Midtown HVAC Supply",
+        "address": "501 8th Ave, New York, NY 10018",
+        "phone": "(212) 555-8080"
+      }
+    ]
+  },
+  "10026": {
+    "Cooling Centers": [],
+    "Legal Aid Clinics": [],
+    "Advocacy Organizations": [],
+    "Retailers": [
+      {
+        "name": "Apollo Appliances",
+        "address": "220 W 116th St, New York, NY 10026",
+        "phone": "(212) 555-1515"
+      }
+    ]
+  }
+}
