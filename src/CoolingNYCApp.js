@@ -1,5 +1,6 @@
 // Cooling NYC Full App Preview
 import React, { useState, useEffect } from "react";
+// Import SVGs as URL strings
 
 // Translations for all the text in the application
 const translations = {
@@ -38,7 +39,7 @@ const translations = {
     noLegalHelp: "No legal help needed",
     back: "← Back",
     next: "Next →",
-    coolingNYCTitle: "🧊 Cooling NYC Quiz",
+    coolingNYCTitle: "CoolNYC",
     finalPlanTitle: "✅ Final Cooling Plan for",
     temperatureSection: "🌡️ Temperature",
     indoor: "Indoor temperature:",
@@ -78,7 +79,11 @@ const translations = {
     goBack: "Go Back",
     noResourcesFound: "No Resources Found",
     noResourcesFoundDesc: "We couldn't find any community resources for ZIP code",
-    restart: "Restart Quiz"
+    restart: "Restart Quiz",
+    unitOption: "Unit",
+    buildingOption: "Building",
+    neighborhoodOrBoroughOption: "Neighborhood/Borough",
+    cityOption: "City"
   },
   Español: {
     languageTitle: "🌐 ¿Idioma preferido?",
@@ -115,7 +120,7 @@ const translations = {
     noLegalHelp: "No necesito ayuda legal",
     back: "← Atrás",
     next: "Siguiente →",
-    coolingNYCTitle: "🧊 Cuestionario de Enfriamiento NYC",
+    coolingNYCTitle: "CoolNYC",
     finalPlanTitle: "✅ Plan Final de Enfriamiento para",
     temperatureSection: "🌡️ Temperatura",
     indoor: "Temperatura interior:",
@@ -155,7 +160,11 @@ const translations = {
     goBack: "Regresar",
     noResourcesFound: "No Se Encontraron Recursos",
     noResourcesFoundDesc: "No pudimos encontrar recursos comunitarios para el código postal",
-    restart: "Reiniciar Cuestionario"
+    restart: "Reiniciar Cuestionario",
+    unitOption: "Unidad",
+    buildingOption: "Edificio",
+    neighborhoodOrBoroughOption: "Vecindario/Barrio",
+    cityOption: "Ciudad"
   },
   中文: {
     languageTitle: "🌐 首选语言？",
@@ -192,7 +201,7 @@ const translations = {
     noLegalHelp: "不需要法律帮助",
     back: "← 返回",
     next: "下一步 →",
-    coolingNYCTitle: "🧊 纽约市降温测验",
+    coolingNYCTitle: "CoolNYC",
     finalPlanTitle: "✅ 为您准备的最终降温计划",
     temperatureSection: "🌡️ 温度",
     indoor: "室内温度：",
@@ -232,7 +241,11 @@ const translations = {
     goBack: "返回",
     noResourcesFound: "未找到资源",
     noResourcesFoundDesc: "我们找不到邮政编码的社区资源",
-    restart: "重新开始测验"
+    restart: "重新开始测验",
+    unitOption: "单元",
+    buildingOption: "建筑",
+    neighborhoodOrBoroughOption: "街区/自治市区",
+    cityOption: "城市"
   },
   বাংলা: {
     languageTitle: "🌐 পছন্দের ভাষা?",
@@ -269,7 +282,7 @@ const translations = {
     noLegalHelp: "আইনি সাহায্যের প্রয়োজন নেই",
     back: "← পিছনে",
     next: "পরবর্তী →",
-    coolingNYCTitle: "🧊 কুলিং NYC কুইজ",
+    coolingNYCTitle: "CoolNYC",
     finalPlanTitle: "✅ চূড়ান্ত কুলিং প্ল্যান",
     temperatureSection: "🌡️ তাপমাত্রা",
     indoor: "ঘরের তাপমাত্রা:",
@@ -309,7 +322,11 @@ const translations = {
     goBack: "ফিরে যান",
     noResourcesFound: "কোন সম্পদ পাওয়া যায়নি",
     noResourcesFoundDesc: "আমরা জিপ কোডের জন্য কোন কমিউনিটি সম্পদ খুঁজে পাইনি",
-    restart: "কুইজ পুনরায় শুরু করুন"
+    restart: "কুইজ পুনরায় শুরু করুন",
+    unitOption: "ইউনিট",
+    buildingOption: "বিল্ডিং",
+    neighborhoodOrBoroughOption: "পাড়া/বরোর",
+    cityOption: "শহর"
   },
   Русский: {
     languageTitle: "🌐 Предпочитаемый язык?",
@@ -346,7 +363,7 @@ const translations = {
     noLegalHelp: "Не нужна юридическая помощь",
     back: "← Назад",
     next: "Далее →",
-    coolingNYCTitle: "🧊 Тест по охлаждению NYC",
+    coolingNYCTitle: "CoolNYC",
     finalPlanTitle: "✅ Окончательный план охлаждения для",
     temperatureSection: "🌡️ Температура",
     indoor: "Температура в помещении:",
@@ -386,7 +403,11 @@ const translations = {
     goBack: "Вернуться",
     noResourcesFound: "Ресурсы не найдены",
     noResourcesFoundDesc: "Мы не смогли найти общественные ресурсы для почтового индекса",
-    restart: "Перезапустить Опрос"
+    restart: "Перезапустить Опрос",
+    unitOption: "Квартира",
+    buildingOption: "Здание",
+    neighborhoodOrBoroughOption: "Район/боро",
+    cityOption: "Город"
   }
 };
 
@@ -397,14 +418,17 @@ const getTranslatedText = (language, key) => {
 
 // Selection Card Component
 const SelectionCard = ({ value, label, selectedValue, onChange, icon }) => {
-  const isSelected = value === selectedValue;
+  // Support both single and multi-select by checking array includes
+  const isSelected = Array.isArray(selectedValue)
+    ? selectedValue.includes(value)
+    : value === selectedValue;
   
   return (
     <div 
       className={`p-4 rounded-lg cursor-pointer border-2 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 ${
         isSelected 
-          ? 'border-green-300 bg-green-800 bg-opacity-80 shadow-green-900/50' 
-          : 'border-white border-opacity-20 bg-green-900 bg-opacity-40 hover:border-opacity-50'
+          ? 'border-blue-300 bg-blue-800 bg-opacity-80 shadow-blue-900/50' 
+          : 'border-white border-opacity-20 bg-blue-900 bg-opacity-40 hover:border-opacity-50'
       }`}
       onClick={() => onChange(value)}
     >
@@ -423,6 +447,7 @@ const CoolingNYCApp = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [validationError, setValidationError] = useState("");
+  const [showLovedOnesOptions, setShowLovedOnesOptions] = useState(false);
 
   // Load JSON data on component mount
   useEffect(() => {
@@ -466,297 +491,275 @@ const CoolingNYCApp = () => {
   // Translation helper for the current language
   const translate = (key) => getTranslatedText(currentLanguage, key);
   
-  // Navigation handlers with validation
-  const nextStep = () => {
-    // Check if required fields are filled for the current step
-    if (step === 0 && !formData.language) {
-      setValidationError(translate("validationLanguage"));
-      return;
-    } else if (step === 1 && !formData.name) {
-      setValidationError(translate("validationName"));
-      return;
-    } else if (step === 2 && !formData.age) {
-      setValidationError(translate("validationAge"));
-      return;
-    } else if (step === 3 && !formData.temperature) {
-      setValidationError(translate("validationTemperature"));
-      return;
-    } else if (step === 3 && !formData.temperatureUnit) {
-      setValidationError(translate("validationTemperatureUnit"));
-      return;
-    } else if (step === 4 && (!formData.zip || !isValidZip(formData.zip))) {
-      setValidationError(translate("validationZip"));
-      return;
-    } else if (step === 5 && !formData.income) {
-      setValidationError(translate("validationIncome"));
-      return;
-    } else if (step === 6 && !formData.advocacyLevel) {
-      setValidationError(translate("validationAdvocacy"));
-      return;
-    } else if (step === 7 && !formData.landlordHelp) {
-      setValidationError(translate("validationLandlord"));
-      return;
-    } else if (step === 8 && !formData.legalHelp) {
-      setValidationError(translate("validationLegal"));
-      return;
-    }
-    
-    setValidationError(""); // Clear validation error
-    setStep(s => Math.min(s + 1, steps.length - 1));
-  };
-  
-  const prevStep = () => {
-    setValidationError(""); // Clear validation error
-    setStep(s => Math.max(s - 1, 0));
+  // Device toggle helper for multi-select
+  const toggleDevice = (device) => {
+    setFormData(prev => {
+      const devices = prev.devices || [];
+      return devices.includes(device)
+        ? { ...prev, devices: devices.filter(d => d !== device) }
+        : { ...prev, devices: [...devices, device] };
+    });
+    setValidationError("");
   };
 
-  // Form steps
+  // Send check-in alert to loved ones via SMS or WhatsApp
+  const sendLovedOnesAlert = (channel) => {
+    const message = encodeURIComponent(`Hi! I'm checking on you because of the extreme heat in my area. Stay safe!`);
+    const smsLink = `sms:&body=${message}`;
+    const waLink = `https://wa.me/?text=${message}`;
+    if (channel === 'whatsapp') {
+      window.open(waLink, '_blank');
+    } else if (channel === 'email') {
+      window.open(`mailto:?body=${message}`, '_self');
+    } else {
+      window.open(smsLink, '_blank');
+    }
+  };
+
+  // Form steps organized into single-page flows
   const steps = [
-    // Step 1: Language
-    <div key="language" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("languageTitle")}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {[
-          { value: "English", label: "English" },
-          { value: "Español", label: "Español" },
-          { value: "中文", label: "中文" },
-          { value: "বাংলা", label: "বাংলা" },
-          { value: "Русский", label: "Русский" }
-        ].map(lang => (
-          <SelectionCard
-            key={lang.value}
-            value={lang.value}
-            label={lang.label}
-            selectedValue={formData.language}
-            onChange={(value) => handleChange("language", value)}
-          />
-        ))}
+    // Landing Page
+    <div key="landing" className="relative flex flex-col items-center justify-center h-screen bg-blue-900 overflow-hidden">
+      {/* Particle animation background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {Array.from({ length: 100 }).map((_, i) => {
+          const size = 8 + Math.random() * 12; // 8px to 20px
+          return (
+            <span
+              key={i}
+              className="particle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                animationDuration: `${4 + Math.random() * 6}s`,
+                animationDelay: `${Math.random() * 5}s`,
+                opacity: 0.5 + Math.random() * 0.5,
+              }}
+            />
+          );
+        })}
       </div>
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
+      <div className="z-10 text-center">
+        <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-sans tracking-tight text-shadow text-white mb-6">
+          CoolNYC
+        </h1>
+        <button
+          onClick={() => setStep(1)}
+          className="mt-8 px-8 py-4 bg-white text-blue-900 rounded-full shadow-lg hover:shadow-xl transition"
+        >
+          Get Started
+        </button>
+      </div>
     </div>,
-    
-    // Step 2: Name
-    <div key="name" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("nameTitle")}</h2>
-      <input
-        type="text"
-        className="w-full p-3 rounded-full bg-white text-black placeholder-gray-400"
-        placeholder={translate("namePlaceholder")}
-        value={formData.name || ""}
-        onChange={(e) => handleChange("name", e.target.value)}
-      />
-    </div>,
-    
-    // Step 3: Age
-    <div key="age" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("ageTitle")}</h2>
-      <input
-        type="number"
-        className="w-full p-3 rounded-full bg-white text-black placeholder-gray-400"
-        placeholder={translate("agePlaceholder")}
-        value={formData.age || ""}
-        onChange={(e) => handleChange("age", e.target.value)}
-      />
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
-    </div>,
-    
-    // Step 4: Temperature
-    <div key="temperature" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("temperatureTitle")}</h2>
-      <input
-        type="number"
-        className="w-full p-3 rounded-full bg-white text-black placeholder-gray-400 shadow-lg"
-        placeholder={translate("temperaturePlaceholder")}
-        value={formData.temperature || ""}
-        onChange={(e) => handleChange("temperature", e.target.value)}
-      />
-      <h3 className="text-xl text-white mt-4">{translate("temperatureUnitTitle")}</h3>
+
+    // About You with name, age, income
+    <div key="about" className="space-y-6">
+      <h2 className="text-2xl font-bold text-white">About You</h2>
+      <div className="flex space-x-3">
+        <input type="text" placeholder="Name" className="flex-1 p-3 rounded-full bg-white text-black" value={formData.name||""} onChange={e=>handleChange("name",e.target.value)} />
+        <input type="number" placeholder="Age" className="flex-1 p-3 rounded-full bg-white text-black" value={formData.age||""} onChange={e=>handleChange("age",e.target.value)} />
+      </div>
+      {/* Income subtitle */}
+      <h3 className="text-lg font-medium text-white">Income</h3>
       <div className="grid grid-cols-2 gap-3">
         {[
-          { value: "F", label: translate("fahrenheit"), icon: "🔥" },
-          { value: "C", label: translate("celsius"), icon: "🧊" }
-        ].map(option => (
+          { value: "<$20k", label: "<$20k", icon: "💲" },
+          { value: "$20k–$40k", label: "$20k–$40k", icon: "💲💲" },
+          { value: "$40k–$60k", label: "$40k–$60k", icon: "💲💲💲" },
+          { value: ">$60k", label: ">$60k", icon: "💲💲💲💲" }
+        ].map(opt => (
           <SelectionCard
-            key={option.value}
-            value={option.value}
-            label={option.label}
-            icon={option.icon}
-            selectedValue={formData.temperatureUnit}
-            onChange={(value) => handleChange("temperatureUnit", value)}
-          />
-        ))}
-      </div>
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
-    </div>,
-    
-    // Step 5: Location
-    <div key="location" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("locationTitle")}</h2>
-      <input
-        type="text"
-        className={`w-full p-3 rounded-full bg-white text-black placeholder-gray-400 ${
-          formData.zip && !isValidZip(formData.zip) ? 'border-2 border-red-500' : ''
-        }`}
-        placeholder={translate("zipPlaceholder")}
-        value={formData.zip || ""}
-        onChange={(e) => {
-          const value = e.target.value.trim();
-          handleChange("zip", value);
-          // Clear validation error if empty or valid ZIP
-          if (!value || isValidZip(value)) {
-            setValidationError("");
-          }
-        }}
-      />
-      <input
-        type="text"
-        className="w-full p-3 rounded-full bg-white text-black placeholder-gray-400"
-        placeholder={translate("addressPlaceholder")}
-        value={formData.address || ""}
-        onChange={(e) => handleChange("address", e.target.value)}
-      />
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
-      {formData.zip && !isValidZip(formData.zip) && !validationError && (
-        <p className="text-yellow-300 mt-2">{translate("zipWarning")}</p>
-      )}
-    </div>,
-    
-    // Step 6: Income
-    <div key="income" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("incomeTitle")}</h2>
-      <div className="grid grid-cols-1 gap-3">
-        {[
-          { value: "<$20,000", label: translate("lessThan20k"), icon: "💲" },
-          { value: "$20,000–$40,000", label: translate("between20kAnd40k"), icon: "💲💲" },
-          { value: "$40,000–$60,000", label: translate("between40kAnd60k"), icon: "💲💲💲" },
-          { value: "$60,000+", label: translate("moreThan60k"), icon: "💲💲💲💲" }
-        ].map(option => (
-          <SelectionCard
-            key={option.value}
-            value={option.value}
-            label={option.label}
-            icon={option.icon}
+            key={opt.value}
+            value={opt.value}
+            label={opt.label}
+            icon={opt.icon}
             selectedValue={formData.income}
-            onChange={(value) => handleChange("income", value)}
+            onChange={val => handleChange("income", val)}
           />
         ))}
       </div>
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
+      {validationError&&step===1&&<p className="text-red-300">{validationError}</p>}
     </div>,
-    
-    // Step 7: Advocacy Level
-    <div key="advocacy" className="space-y-4">
+
+    // Your Location with address, zip, temperature
+    <div key="location" className="space-y-6">
+      <h2 className="text-2xl font-bold text-white">Your Location</h2>
+      <div className="flex space-x-3">
+        <input type="text" placeholder="Full Address (Optional)" className="flex-1 p-3 rounded-full bg-white text-black" value={formData.address||""} onChange={e=>handleChange("address",e.target.value)} />
+        <input type="text" placeholder="ZIP Code" className={`flex-1 p-3 rounded-full bg-white text-black ${formData.zip&&!isValidZip(formData.zip)?'border-red-500 border-2':''}`} value={formData.zip||""} onChange={e=>{handleChange("zip",e.target.value.trim()); if(!e.target.value||isValidZip(e.target.value))setValidationError("");}} />
+      </div>
+      <div className="flex items-center space-x-3">
+        <input
+          type="number"
+          placeholder="Indoor Temperature"
+          className="flex-1 p-3 rounded-full bg-white text-black"
+          value={formData.temperature||""}
+          onChange={e=>handleChange("temperature",e.target.value)}
+        />
+        <button
+          type="button"
+          onClick={() => handleChange("temperatureUnit", formData.temperatureUnit === 'C' ? 'F' : 'C')}
+          className="px-4 py-3 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition"
+        >
+          °{formData.temperatureUnit || 'F'}
+        </button>
+      </div>
+      {validationError&&step===2&&<p className="text-red-300">{validationError}</p>}
+    </div>,
+
+    // Cooling Products & Help
+    <div key="products" className="space-y-6">
+      <h2 className="text-2xl font-bold text-white">Cooling Products & Help</h2>
+      <h3 className="text-lg text-white">Select Device(s)</h3>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {[{name:"Portable AC",icon:"🧊"},{name:"Fan",icon:"🌀"},{name:"Heat Pump",icon:"🔥"},{name:"Evaporative Cooler",icon:"💧"},{name:"Ice Cooler",icon:"❄️"},{name:"Thermal Cooler",icon:"🌡️"},{name:"Motion Cooler",icon:"🏃"},{name:"Wearable",icon:"👕"}].map(dev=>(
+          <SelectionCard key={dev.name} value={dev.name} label={`${dev.icon} ${dev.name}`} selectedValue={formData.devices} onChange={()=>toggleDevice(dev.name)} />
+        ))}
+      </div>
+      <h3 className="text-lg text-white">Match with Installer?</h3>
+      <div className="grid grid-cols-2 gap-3"><SelectionCard value={true} label="Yes" selectedValue={formData.installerMatch} onChange={val=>handleChange("installerMatch",val)} /><SelectionCard value={false} label="No" selectedValue={formData.installerMatch} onChange={val=>handleChange("installerMatch",val)} /></div>
+      <h3 className="text-lg text-white">Energy Bill Assistance?</h3>
+      <div className="grid grid-cols-2 gap-3"><SelectionCard value={true} label="Yes" selectedValue={formData.energyAssistance} onChange={val=>handleChange("energyAssistance",val)} /><SelectionCard value={false} label="No" selectedValue={formData.energyAssistance} onChange={val=>handleChange("energyAssistance",val)} /></div>
+      {validationError&&step===3&&<p className="text-red-300">{validationError}</p>}
+    </div>,
+
+    // Mediation Support
+    <div key="mediation" className="space-y-6">
       <h2 className="text-2xl font-bold text-white">{translate("advocacyTitle")}</h2>
-      <div className="grid grid-cols-1 gap-3">
+      <h3 className="text-lg text-white">{translate("landlordTitle")}</h3>
+      <div className="grid grid-cols-2 gap-3">
         {[
-          { value: "Unit or Building", label: translate("unitOrBuilding"), icon: "🏢" },
-          { value: "Street or Neighborhood", label: translate("streetOrNeighborhood"), icon: "🏘️" },
-          { value: "Borough or City", label: translate("boroughOrCity"), icon: "🌆" }
-        ].map(option => (
+          { value: true, label: translate("yesNeedLetter"), icon: "✉️" },
+          { value: false, label: translate("noThanks"), icon: "❌" }
+        ].map(opt => (
           <SelectionCard
-            key={option.value}
-            value={option.value}
-            label={option.label}
-            icon={option.icon}
-            selectedValue={formData.advocacyLevel}
-            onChange={(value) => handleChange("advocacyLevel", value)}
-          />
-        ))}
-      </div>
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
-    </div>,
-    
-    // Step 8: Landlord Help
-    <div key="landlord" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("landlordTitle")}</h2>
-      <div className="grid grid-cols-1 gap-3">
-        {[
-          { value: "Yes, need a letter", label: translate("yesNeedLetter"), icon: "✉️" },
-          { value: "No", label: translate("noThanks"), icon: "❌" }
-        ].map(option => (
-          <SelectionCard
-            key={option.value}
-            value={option.value}
-            label={option.label}
-            icon={option.icon}
+            key={String(opt.value)}
+            value={opt.value}
+            label={opt.label}
+            icon={opt.icon}
             selectedValue={formData.landlordHelp}
-            onChange={(value) => handleChange("landlordHelp", value)}
+            onChange={val => handleChange("landlordHelp", val)}
           />
         ))}
       </div>
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
-    </div>,
-    
-    // Step 9: Legal Help
-    <div key="legal" className="space-y-4">
-      <h2 className="text-2xl font-bold text-white">{translate("legalHelpTitle")}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <h3 className="text-lg text-white">{translate("legalHelpTitle")}</h3>
+      <div className="grid grid-cols-3 gap-3">
         {[
           { value: "Pro bono", label: translate("proBono"), icon: "⚖️" },
           { value: "$100–$300", label: translate("between100And300"), icon: "💰" },
           { value: "$300–$500", label: translate("between300And500"), icon: "💰💰" },
           { value: "$500+", label: translate("moreThan500"), icon: "💰💰💰" },
-          { value: "No", label: translate("noLegalHelp"), icon: "❌" }
-        ].map(option => (
+          { value: "none", label: translate("noLegalHelp"), icon: "❌" }
+        ].map(opt => (
           <SelectionCard
-            key={option.value}
-            value={option.value}
-            label={option.label}
-            icon={option.icon}
+            key={opt.value}
+            value={opt.value}
+            label={opt.label}
+            icon={opt.icon}
             selectedValue={formData.legalHelp}
-            onChange={(value) => handleChange("legalHelp", value)}
+            onChange={val => handleChange("legalHelp", val)}
           />
         ))}
       </div>
-      {validationError && <p className="text-red-300 mt-2">{validationError}</p>}
+      {validationError&&step===4&&<p className="text-red-300">{validationError}</p>}
     </div>,
-    
-    // Step 10: Final Plan
+
+    // Advocacy
+    <div key="advocacy" className="space-y-6">
+      <h2 className="text-2xl font-bold text-white">{translate("advocacyTitle")}</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {[
+          { value: "unit", key: "unitOption", icon: "🏠" },
+          { value: "building", key: "buildingOption", icon: "🏢" },
+          { value: "neighborhoodOrBorough", key: "neighborhoodOrBoroughOption", icon: "🌆" },
+          { value: "city", key: "cityOption", icon: "🌃" }
+        ].map(opt => (
+          <SelectionCard
+            key={opt.value}
+            value={opt.value}
+            label={translate(opt.key)}
+            icon={opt.icon}
+            selectedValue={formData.advocacyOption}
+            onChange={v => handleChange("advocacyOption", v)}
+          />
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={() => setShowLovedOnesOptions(true)}
+        className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition"
+      >
+        Check on your loved ones?
+      </button>
+      {showLovedOnesOptions && (
+        <div className="flex space-x-3 mt-3">
+          <button
+            type="button"
+            onClick={() => sendLovedOnesAlert('sms')}
+            className="flex-1 px-6 py-3 bg-blue-700 text-white rounded-full shadow-lg hover:bg-blue-800 transition flex items-center justify-center space-x-2"
+          >
+            <img src="/icons/iMessage.svg" alt="Message" className="w-6 h-6 filter brightness-0 invert" />
+            <span>Message</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => sendLovedOnesAlert('whatsapp')}
+            className="flex-1 px-6 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition flex items-center justify-center space-x-2"
+          >
+            <img src="/icons/whatsapp.svg" alt="WhatsApp" className="w-6 h-6 filter brightness-0 invert" />
+            <span>WhatsApp</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => sendLovedOnesAlert('email')}
+            className="flex-1 px-6 py-3 bg-yellow-500 text-white rounded-full shadow-lg hover:bg-yellow-600 transition flex items-center justify-center space-x-2"
+          >
+            <span className="text-2xl">📧</span>
+            <span>Email</span>
+          </button>
+        </div>
+      )}
+      {validationError && step===5 && <p className="text-red-300">{validationError}</p>}
+    </div>,
+
+    // Final Plan
     <FinalPlan key="final" formData={formData} resourceData={resourceData} isLoading={isLoading} error={error} />
   ];
 
+  // If we're on the landing step, render it exclusively to avoid extra layout and scrolling
+  if (step === 0) {
+    return steps[0];
+  }
+
   return (
-    <div className="max-w-2xl mx-auto p-6 min-h-screen bg-gradient-to-b from-[#014421] to-[#013017] text-white">
-      <h2 className="text-center text-3xl font-bold mb-6 text-shadow">{translate("coolingNYCTitle")}</h2>
-      
-      {/* Progress bar */}
-      <div className="w-full h-3 bg-green-900 rounded-full overflow-hidden mb-8 shadow-inner">
-        <div
-          className="h-full bg-green-400 transition-all duration-300"
-          style={{ width: `${(step / (steps.length - 1)) * 100}%` }}
-        />
-      </div>
-      
-      {/* Current step */}
-      <div className="bg-green-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10">
-        {steps[step]}
-      </div>
-      
-      {/* Navigation buttons */}
-      <div className="flex justify-between mt-8 items-center">
+    <div className="min-h-screen bg-blue-900">
+      <div className="w-full max-w-4xl mx-auto p-6 text-white">
         {step > 0 && (
-          <button 
-            className="px-6 py-3 bg-white text-green-800 rounded-full hover:bg-gray-200 transition shadow-lg font-medium" 
-            onClick={prevStep}
-          >
-            {translate("back")}
-          </button>
+          <>
+            <h2 className="text-center text-3xl font-bold mb-6 text-shadow">{translate("coolingNYCTitle")}</h2>
+            {/* Progress bar */}
+            <div className="w-full h-3 bg-blue-900 rounded-full overflow-hidden mb-8 shadow-inner">
+              <div
+                className="h-full bg-blue-400 transition-all duration-300"
+                style={{ width: `${(step / (steps.length - 1)) * 100}%` }}
+              />
+            </div>
+          </>
         )}
         
-        <button 
-          className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg font-medium flex items-center mx-2"
-          onClick={() => window.location.reload()}
-        >
-          <span className="mr-1">↺</span> {translate("restart")}
-        </button>
+        {/* Current step */}
+        <div className="bg-blue-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10">
+          {steps[step]}
+        </div>
         
-        {step < steps.length - 1 && (
-          <button 
-            className="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition shadow-lg font-medium" 
-            onClick={nextStep}
-          >
-            {translate("next")}
-          </button>
+        {/* Navigation buttons with Restart, hidden on landing page */}
+        {step > 0 && (
+          <div className="flex justify-between items-center mt-8">
+            <button onClick={() => setStep(step - 1)} className="px-6 py-3 bg-white text-blue-800 rounded-full shadow-lg">Back</button>
+            <button onClick={() => window.location.reload()} className="px-6 py-3 bg-red-500 text-white rounded-full shadow-lg">↺ Restart</button>
+            {step < steps.length - 1 && (<button onClick={() => setStep(step + 1)} className="px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg">Next</button>)}
+          </div>
         )}
       </div>
     </div>
@@ -780,7 +783,7 @@ const ResourceCard = ({ title, resource, language }) => {
     <div className="bg-white bg-opacity-20 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 backdrop-blur-sm mb-3 border border-white border-opacity-10">
       <h4 className="font-medium text-lg">{title}</h4>
       <p className="mt-1">{resource.address}</p>
-      <p className="text-green-300">{resource.phone}</p>
+      <p className="text-blue-300">{resource.phone}</p>
       {resource.website && (
         <a 
           href={resource.website} 
@@ -843,7 +846,7 @@ function FinalPlan({ formData, resourceData, isLoading, error }) {
           <li>11432 - Queens</li>
         </ul>
         <button 
-          className="px-5 py-2 bg-white text-green-800 rounded-full mt-4" 
+          className="px-5 py-2 bg-white text-blue-800 rounded-full mt-4" 
           onClick={() => window.history.back()}
         >
           {translate("goBack")}
@@ -895,7 +898,7 @@ function FinalPlan({ formData, resourceData, isLoading, error }) {
 
 I am writing to request ${legalHelp} legal assistance regarding unsafe heat conditions at my residence located at ${address || "[Your Address]"}, ZIP ${zip}.
 
-The indoor temperature has reached ${temperature ? `${temperature}°${temperatureUnit || "F"}` : "unsafe levels"}, which violates NYC housing maintenance code requirements for safe living conditions. I have already ${landlordHelp?.startsWith("Yes") ? "contacted my landlord" : "attempted to resolve this issue"}, but require professional legal support to ensure my rights as a tenant are protected.
+The indoor temperature has reached ${temperature ? `${temperature}°${temperatureUnit || "F"}` : "unsafe levels"}, which violates NYC housing maintenance code requirements for safe living conditions. I have already ${landlordHelp === true ? "contacted my landlord" : "attempted to resolve this issue"}, but require professional legal support to ensure my rights as a tenant are protected.
 
 I am seeking representation for a potential case concerning these unsafe heat conditions, and am prepared to allocate ${legalHelp === "Pro bono" ? "minimal resources as I qualify for pro bono assistance" : legalHelp} for legal fees to address this matter.
 
@@ -933,32 +936,27 @@ ${name || "Resident"}`;
     <div className="space-y-6 text-white">
       <h2 className="text-2xl font-bold">{translate("finalPlanTitle")} {name || "You"}</h2>
 
-      <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
-        <h3 className="font-semibold text-lg">{translate("temperatureSection")}</h3>
-        {temperature ? (
-          <p>{translate("indoor")} {temperature}°{temperatureUnit || "F"}</p>
-        ) : (
-          <p>{translate("noTempProvided")}</p>
-        )}
+      {/* Health Warning */}
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
+        <h3 className="font-semibold text-lg mb-2">Health Warning</h3>
+        <p>Extreme heat can be dangerous, especially for young children, older adults, and people with health conditions. Stay hydrated, seek shade, and consult a medical professional if you feel unwell.</p>
       </div>
 
-      <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
-        <h3 className="font-semibold text-lg">{translate("subsidySection")}</h3>
-        {income ? (
-          <p>{["<$20,000", "$20,000–$40,000"].includes(income)
-            ? translate("qualifyHeap")
-            : translate("notQualifyHeap")}</p>
-        ) : (
-          <p>{translate("noIncomeProvided")}</p>
-        )}
+      {/* Subsidy Eligibility */}
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
+        <h3 className="font-semibold text-lg mb-2">Subsidy Eligibility</h3>
+        <ul className="list-disc ml-6 space-y-1">
+          <li><a href="https://www.nyc.gov/site/acs/services/food-assistance/heap.page" className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">NYC HEAP Subsidy</a></li>
+          <li><a href="https://www1.nyc.gov/site/nycha/index.page" className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">NYCHA Cooling Assistance</a></li>
+        </ul>
       </div>
 
-      {/* Cooling Centers */}
-      <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
+      {/* Cooling Centers (max 3) */}
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
         <h3 className="font-semibold text-lg mb-2">{translate("coolingCentersTitle")} {zip}</h3>
         {coolingCenters.length > 0 ? (
           <div className="space-y-2">
-            {coolingCenters.map((center, idx) => (
+            {coolingCenters.slice(0,3).map((center, idx) => (
               <ResourceCard key={idx} title={center.name} resource={center} language={currentLanguage} />
             ))}
           </div>
@@ -967,12 +965,39 @@ ${name || "Resident"}`;
         )}
       </div>
 
+      {/* Cooling Devices */}
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
+        <h3 className="font-semibold text-lg mb-2">Cooling Devices</h3>
+        <p>Local retailers near you:</p>
+        <ul className="list-disc ml-6 space-y-1">
+          {retailers.slice(0,3).map((r, i) => (
+            <li key={i}><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.address)}`} className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">{r.name}</a></li>
+          ))}
+        </ul>
+        <p className="mt-2">Online options:</p>
+        <ul className="list-disc ml-6 space-y-1">
+          <li><a href="https://www.amazon.com/s?k=portable+air+conditioner" className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">Amazon - Portable AC</a></li>
+          <li><a href="https://www.homedepot.com/b/Heating-Venting-Cooling-Air-Conditioning-Portable-Air-Conditioners" className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">Home Depot - AC Units</a></li>
+          <li><a href="https://www.taskrabbit.com/" className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">TaskRabbit Installation</a></li>
+        </ul>
+      </div>
+
+      {/* Energy Savings Tips */}
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
+        <h3 className="font-semibold text-lg mb-2">Energy Bill Savings Guide</h3>
+        <ul className="list-disc ml-6 space-y-1">
+          <li>Set your thermostat as high as comfortably possible.</li>
+          <li>Use ceiling fans to reduce AC needs.</li>
+          <li>Seal windows and doors to prevent cool air loss.</li>
+        </ul>
+      </div>
+
       {/* Legal Aid Clinics */}
-      <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
         <h3 className="font-semibold text-lg mb-2">{translate("legalAidTitle")} {zip}</h3>
         {legalAidClinics.length > 0 ? (
           <div className="space-y-2">
-            {legalAidClinics.map((clinic, idx) => (
+            {legalAidClinics.slice(0,3).map((clinic, idx) => (
               <ResourceCard key={idx} title={clinic.name} resource={clinic} language={currentLanguage} />
             ))}
           </div>
@@ -982,7 +1007,7 @@ ${name || "Resident"}`;
       </div>
 
       {/* Advocacy Organizations */}
-      <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
         <h3 className="font-semibold text-lg mb-2">{translate("advocacyOrgsTitle")} {borough}</h3>
         {advocacyOrgs.length > 0 ? (
           <div className="space-y-2">
@@ -996,7 +1021,7 @@ ${name || "Resident"}`;
       </div>
 
       {/* Retailers */}
-      <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
+      <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
         <h3 className="font-semibold text-lg mb-2">{translate("retailersTitle")} {zip}</h3>
         {retailers.length > 0 ? (
           <div className="space-y-2">
@@ -1010,55 +1035,24 @@ ${name || "Resident"}`;
       </div>
 
       {legalHelp && legalHelp !== "No" && (
-        <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
+        <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
           <h3 className="font-semibold text-lg">{translate("legalSupportTitle")}</h3>
           <textarea
             className="w-full p-4 mt-2 text-black bg-gray-100 rounded-lg shadow-inner"
-            rows={8}
+            rows={6}
             readOnly
-            value={`Dear Legal Representative,
-
-I am writing to request ${legalHelp} legal assistance regarding unsafe heat conditions at my residence located at ${address || "[Your Address]"}, ZIP ${zip}.
-
-The indoor temperature has reached ${temperature ? `${temperature}°${temperatureUnit || "F"}` : "unsafe levels"}, which violates NYC housing maintenance code requirements for safe living conditions. I have already ${landlordHelp?.startsWith("Yes") ? "contacted my landlord" : "attempted to resolve this issue"}, but require professional legal support to ensure my rights as a tenant are protected.
-
-I am seeking representation for a potential case concerning these unsafe heat conditions, and am prepared to allocate ${legalHelp === "Pro bono" ? "minimal resources as I qualify for pro bono assistance" : legalHelp} for legal fees to address this matter.
-
-Please contact me at your earliest convenience to discuss my case and possible legal remedies.
-
-Sincerely,
-${name || "Resident"}`}
+            value={getLegalLetterContent()}
           />
         </div>
       )}
-
-      {landlordHelp?.startsWith("Yes") && (
-        <div className="bg-green-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-green-200 border-opacity-20">
+      {landlordHelp === true && (
+        <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
           <h3 className="font-semibold text-lg">{translate("landlordLetterTitle")}</h3>
           <textarea
             className="w-full p-4 mt-2 text-black bg-gray-100 rounded-lg shadow-inner"
-            rows={8}
+            rows={6}
             readOnly
-            value={`Dear Property Owner/Manager,
-
-RE: Urgent Request for Cooling Remediation at ${address || "[Your Address]"}, ZIP ${zip}
-
-This letter serves as a formal notification that the indoor temperature at my residence has reached ${temperature ? `${temperature}°${temperatureUnit || "F"}` : "unsafe levels"}, creating unacceptable living conditions that may violate NYC housing codes and regulations.
-
-According to New York City housing maintenance code and the warranty of habitability (NYC Admin Code § 27-2005), landlords are required to maintain habitable living conditions for tenants, which includes protection from extreme heat. During summer months, this means ensuring reasonable cooling options are available.
-
-I am requesting that you take immediate action within 48 hours to address this issue by:
-1. Providing or repairing air conditioning units
-2. Ensuring proper ventilation and airflow in the building
-3. Addressing any insulation issues contributing to heat retention
-4. Taking any other necessary measures to bring indoor temperatures to safe levels
-
-If I do not receive a response or if no corrective action is taken within the specified timeframe, I will be forced to pursue other remedies available to me under New York tenant protection laws, including contacting the NYC Department of Housing Preservation and Development.
-
-I look forward to your prompt attention to this matter.
-
-Sincerely,
-${name || "Resident"}`}
+            value={getLandlordLetterContent()}
           />
         </div>
       )}
