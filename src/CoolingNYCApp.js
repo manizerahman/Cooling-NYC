@@ -449,7 +449,9 @@ const CoolingNYCApp = () => {
   const [validationError, setValidationError] = useState("");
   const [showLovedOnesOptions, setShowLovedOnesOptions] = useState(false);
   const particles = useMemo(() => {
-    return Array.from({ length: 200 }).map((_, i) => {
+    const mobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const count = mobile ? 80 : 200;
+    return Array.from({ length: count }).map((_, i) => {
       const size = 8 + Math.random() * 12;
       const duration = 4 + Math.random() * 6;
       const delay = Math.random() * duration;
@@ -740,9 +742,8 @@ const CoolingNYCApp = () => {
     return steps[0];
   }
 
-  const isFinalStep = step === steps.length - 1;
   return (
-    <div className={`relative bg-gradient-to-br from-blue-900 to-blue-600 overflow-hidden ${isFinalStep ? 'overflow-y-auto min-h-screen' : 'flex items-center justify-center h-screen'}`}>
+    <div className="relative bg-gradient-to-br from-blue-900 to-blue-600 overflow-y-auto min-h-screen md:flex md:items-center md:justify-center">
       {/* Particle animation background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles}
@@ -762,10 +763,8 @@ const CoolingNYCApp = () => {
         )}
         
         {/* Current step */}
-        <div className="flex-grow flex items-center justify-center">
-          <div className="bg-blue-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10 w-full overflow-x-auto">
-            {steps[step]}
-          </div>
+        <div className="bg-blue-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10 w-full overflow-x-auto">
+          {steps[step]}
         </div>
 
         {/* Navigation buttons with Restart, hidden on landing page */}
