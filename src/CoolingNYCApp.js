@@ -1,5 +1,5 @@
 // Cooling NYC Full App Preview
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 // Import SVGs as URL strings
 
 // Translations for all the text in the application
@@ -448,6 +448,27 @@ const CoolingNYCApp = () => {
   const [error, setError] = useState(null);
   const [validationError, setValidationError] = useState("");
   const [showLovedOnesOptions, setShowLovedOnesOptions] = useState(false);
+  const particles = useMemo(() => {
+    return Array.from({ length: 200 }).map((_, i) => {
+      const size = 8 + Math.random() * 12;
+      const duration = 4 + Math.random() * 6;
+      const delay = Math.random() * duration;
+      return (
+        <span
+          key={i}
+          className="particle"
+          style={{
+            left: `${Math.random() * 100}%`,
+            width: `${size}px`,
+            height: `${size}px`,
+            animationDuration: `${duration}s`,
+            animationDelay: `-${delay}s`,
+            opacity: 0.5 + Math.random() * 0.5,
+          }}
+        />
+      );
+    });
+  }, []);
 
   // Load JSON data on component mount
   useEffect(() => {
@@ -525,28 +546,10 @@ const CoolingNYCApp = () => {
     >
       {/* Particle animation background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 200 }).map((_, i) => {
-          const size = 8 + Math.random() * 12; // 8px to 20px
-          const duration = 4 + Math.random() * 6; // total animation duration
-          const delay = Math.random() * duration; // random offset into animation
-          return (
-            <span
-              key={i}
-              className="particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                width: `${size}px`,
-                height: `${size}px`,
-                animationDuration: `${duration}s`,
-                animationDelay: `-${delay}s`,
-                opacity: 0.5 + Math.random() * 0.5,
-              }}
-            />
-          );
-        })}
+        {particles}
       </div>
       <div className="z-10 text-center">
-        <h1 className="[font-size:7rem] font-semibold font-cooling tracking-tight text-shadow text-white mb-6">
+        <h1 className="text-5xl sm:text-[7rem] font-semibold font-cooling tracking-tight text-shadow text-white mb-6">
           CoolNYC
         </h1>
         <button
@@ -561,13 +564,13 @@ const CoolingNYCApp = () => {
     // About You with name, age, income
     <div key="about" className="space-y-6">
       <h2 className="text-2xl font-bold text-white">About You</h2>
-      <div className="flex space-x-3">
-        <input type="text" placeholder="Name" className="flex-1 p-3 rounded-full bg-white text-black" value={formData.name||""} onChange={e=>handleChange("name",e.target.value)} />
-        <input type="number" placeholder="Age" className="flex-1 p-3 rounded-full bg-white text-black" value={formData.age||""} onChange={e=>handleChange("age",e.target.value)} />
+      <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
+        <input type="text" placeholder="Name" className="flex-1 min-w-0 p-3 rounded-full bg-white text-black" value={formData.name||""} onChange={e=>handleChange("name",e.target.value)} />
+        <input type="number" placeholder="Age" className="flex-1 min-w-0 p-3 rounded-full bg-white text-black" value={formData.age||""} onChange={e=>handleChange("age",e.target.value)} />
       </div>
       {/* Income subtitle */}
       <h3 className="text-lg font-medium text-white">Income</h3>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[
           { value: "<$20k", label: "<$20k", icon: "💲" },
           { value: "$20k–$40k", label: "$20k–$40k", icon: "💲💲" },
@@ -590,22 +593,22 @@ const CoolingNYCApp = () => {
     // Your Location with address, zip, temperature
     <div key="location" className="space-y-6">
       <h2 className="text-2xl font-bold text-white">Your Location</h2>
-      <div className="flex space-x-3">
-        <input type="text" placeholder="Full Address (Optional)" className="flex-1 p-3 rounded-full bg-white text-black" value={formData.address||""} onChange={e=>handleChange("address",e.target.value)} />
-        <input type="text" placeholder="ZIP Code" className={`flex-1 p-3 rounded-full bg-white text-black ${formData.zip&&!isValidZip(formData.zip)?'border-red-500 border-2':''}`} value={formData.zip||""} onChange={e=>{handleChange("zip",e.target.value.trim()); if(!e.target.value||isValidZip(e.target.value))setValidationError("");}} />
+      <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
+        <input type="text" placeholder="Full Address (Optional)" className="flex-1 min-w-0 p-3 rounded-full bg-white text-black" value={formData.address||""} onChange={e=>handleChange("address",e.target.value)} />
+        <input type="text" placeholder="ZIP Code" className={`flex-1 min-w-0 p-3 rounded-full bg-white text-black ${formData.zip&&!isValidZip(formData.zip)?'border-red-500 border-2':''}`} value={formData.zip||""} onChange={e=>{handleChange("zip",e.target.value.trim()); if(!e.target.value||isValidZip(e.target.value))setValidationError("");}} />
       </div>
-      <div className="flex items-center space-x-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-3 sm:space-y-0">
         <input
           type="number"
           placeholder="Indoor Temperature"
-          className="flex-1 p-3 rounded-full bg-white text-black"
+          className="flex-1 min-w-0 p-3 rounded-full bg-white text-black"
           value={formData.temperature||""}
           onChange={e=>handleChange("temperature",e.target.value)}
         />
         <button
           type="button"
           onClick={() => handleChange("temperatureUnit", formData.temperatureUnit === 'C' ? 'F' : 'C')}
-          className="px-4 py-3 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition"
+          className="w-full sm:w-auto px-4 py-2 sm:px-4 sm:py-3 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition text-sm sm:text-base"
         >
           °{formData.temperatureUnit || 'F'}
         </button>
@@ -617,7 +620,7 @@ const CoolingNYCApp = () => {
     <div key="products" className="space-y-6">
       <h2 className="text-2xl font-bold text-white">Cooling Products & Help</h2>
       <h3 className="text-lg text-white">Select Device(s)</h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
         {[{name:"Portable AC",icon:"🧊"},{name:"Fan",icon:"🌀"},{name:"Heat Pump",icon:"🔥"},{name:"Evaporative Cooler",icon:"💧"},{name:"Ice Cooler",icon:"❄️"},{name:"Thermal Cooler",icon:"🌡️"},{name:"Motion Cooler",icon:"🏃"},{name:"Wearable",icon:"👕"}].map(dev=>(
           <SelectionCard key={dev.name} value={dev.name} label={`${dev.icon} ${dev.name}`} selectedValue={formData.devices} onChange={()=>toggleDevice(dev.name)} />
         ))}
@@ -633,7 +636,7 @@ const CoolingNYCApp = () => {
     <div key="mediation" className="space-y-6">
       <h2 className="text-2xl font-bold text-white">{translate("advocacyTitle")}</h2>
       <h3 className="text-lg text-white">{translate("landlordTitle")}</h3>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[
           { value: true, label: translate("yesNeedLetter"), icon: "✉️" },
           { value: false, label: translate("noThanks"), icon: "❌" }
@@ -649,7 +652,7 @@ const CoolingNYCApp = () => {
         ))}
       </div>
       <h3 className="text-lg text-white">{translate("legalHelpTitle")}</h3>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
         {[
           { value: "Pro bono", label: translate("proBono"), icon: "⚖️" },
           { value: "$100–$300", label: translate("between100And300"), icon: "💰" },
@@ -673,7 +676,7 @@ const CoolingNYCApp = () => {
     // Advocacy
     <div key="advocacy" className="space-y-6">
       <h2 className="text-2xl font-bold text-white">{translate("advocacyTitle")}</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
         {[
           { value: "unit", key: "unitOption", icon: "🏠" },
           { value: "building", key: "buildingOption", icon: "🏢" },
@@ -698,7 +701,7 @@ const CoolingNYCApp = () => {
         Check on your loved ones?
       </button>
       {showLovedOnesOptions && (
-        <div className="flex space-x-3 mt-3">
+        <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0 mt-3">
           <button
             type="button"
             onClick={() => sendLovedOnesAlert('sms')}
@@ -742,27 +745,9 @@ const CoolingNYCApp = () => {
     <div className={`relative bg-gradient-to-br from-blue-900 to-blue-600 overflow-hidden ${isFinalStep ? 'overflow-y-auto min-h-screen' : 'flex items-center justify-center h-screen'}`}>
       {/* Particle animation background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 200 }).map((_, i) => {
-          const size = 8 + Math.random() * 12;
-          const duration = 4 + Math.random() * 6;
-          const delay = Math.random() * duration;
-          return (
-            <span
-              key={i}
-              className="particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                width: `${size}px`,
-                height: `${size}px`,
-                animationDuration: `${duration}s`,
-                animationDelay: `-${delay}s`,
-                opacity: 0.5 + Math.random() * 0.5,
-              }}
-            />
-          );
-        })}
+        {particles}
       </div>
-      <div className="w-full max-w-4xl mx-auto px-6 py-12 text-white relative z-10">
+      <div className="w-full max-w-lg md:max-w-3xl lg:max-w-5xl mx-auto px-4 sm:px-6 py-12 text-white relative z-10">
         {step > 0 && (
           <div className="flex-shrink-0 mb-4">
             <h2 className="text-center text-3xl font-bold mb-4 text-shadow">{translate("coolingNYCTitle")}</h2>
@@ -778,14 +763,14 @@ const CoolingNYCApp = () => {
         
         {/* Current step */}
         <div className="flex-grow flex items-center justify-center">
-          <div className="bg-blue-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10 w-full">
+          <div className="bg-blue-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10 w-full overflow-x-auto">
             {steps[step]}
           </div>
         </div>
 
         {/* Navigation buttons with Restart, hidden on landing page */}
         {step > 0 && (
-          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center mt-6 space-y-2 sm:space-y-0 sm:space-x-4">
+          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center mt-6 w-full space-y-2 sm:space-y-0 sm:space-x-4">
             <button onClick={() => setStep(step - 1)} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-white text-blue-800 rounded-full shadow-lg">Back</button>
             <button onClick={() => window.location.reload()} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-red-500 text-white rounded-full shadow-lg">↺ Restart</button>
             {step < steps.length - 1 && (
