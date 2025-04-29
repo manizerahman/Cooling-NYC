@@ -32,3 +32,17 @@ body {
     opacity: 0;
   }
 }
+
+/* Add 3D floating effect for landing title */
+@keyframes float3d {
+  0% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translateY(-10px) rotateX(10deg) rotateY(15deg); }
+  50% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  75% { transform: translateY(-8px) rotateX(-5deg) rotateY(-10deg); }
+  100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+}
+
+.text-3d-float {
+  transform-style: preserve-3d;
+  animation: float3d 8s ease-in-out infinite;
+}

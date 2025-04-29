@@ -519,11 +519,16 @@ const CoolingNYCApp = () => {
   // Form steps organized into single-page flows
   const steps = [
     // Landing Page
-    <div key="landing" className="relative flex flex-col items-center justify-center h-screen bg-blue-900 overflow-hidden">
+    <div
+      key="landing"
+      className="relative flex flex-col items-center justify-center h-screen bg-gradient-to-br from-blue-900 to-blue-600 overflow-hidden"
+    >
       {/* Particle animation background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 100 }).map((_, i) => {
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {Array.from({ length: 200 }).map((_, i) => {
           const size = 8 + Math.random() * 12; // 8px to 20px
+          const duration = 4 + Math.random() * 6; // total animation duration
+          const delay = Math.random() * duration; // random offset into animation
           return (
             <span
               key={i}
@@ -532,8 +537,8 @@ const CoolingNYCApp = () => {
                 left: `${Math.random() * 100}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                animationDuration: `${4 + Math.random() * 6}s`,
-                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${duration}s`,
+                animationDelay: `-${delay}s`,
                 opacity: 0.5 + Math.random() * 0.5,
               }}
             />
@@ -541,12 +546,12 @@ const CoolingNYCApp = () => {
         })}
       </div>
       <div className="z-10 text-center">
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-sans tracking-tight text-shadow text-white mb-6">
+        <h1 className="[font-size:7rem] font-semibold font-cooling tracking-tight text-shadow text-white mb-6">
           CoolNYC
         </h1>
         <button
           onClick={() => setStep(1)}
-          className="mt-8 px-8 py-4 bg-white text-blue-900 rounded-full shadow-lg hover:shadow-xl transition"
+          className="mt-8 px-8 py-4 bg-white text-blue-900 rounded-full shadow-lg transition-colors duration-200 ease-in-out hover:bg-blue-200"
         >
           Get Started
         </button>
@@ -732,33 +737,60 @@ const CoolingNYCApp = () => {
     return steps[0];
   }
 
+  const isFinalStep = step === steps.length - 1;
   return (
-    <div className="min-h-screen bg-blue-900">
-      <div className="w-full max-w-4xl mx-auto p-6 text-white">
+    <div className={`relative bg-gradient-to-br from-blue-900 to-blue-600 overflow-hidden ${isFinalStep ? 'overflow-y-auto min-h-screen' : 'flex items-center justify-center h-screen'}`}>
+      {/* Particle animation background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {Array.from({ length: 200 }).map((_, i) => {
+          const size = 8 + Math.random() * 12;
+          const duration = 4 + Math.random() * 6;
+          const delay = Math.random() * duration;
+          return (
+            <span
+              key={i}
+              className="particle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                animationDuration: `${duration}s`,
+                animationDelay: `-${delay}s`,
+                opacity: 0.5 + Math.random() * 0.5,
+              }}
+            />
+          );
+        })}
+      </div>
+      <div className="w-full max-w-4xl mx-auto px-6 py-12 text-white relative z-10">
         {step > 0 && (
-          <>
-            <h2 className="text-center text-3xl font-bold mb-6 text-shadow">{translate("coolingNYCTitle")}</h2>
+          <div className="flex-shrink-0 mb-4">
+            <h2 className="text-center text-3xl font-bold mb-4 text-shadow">{translate("coolingNYCTitle")}</h2>
             {/* Progress bar */}
-            <div className="w-full h-3 bg-blue-900 rounded-full overflow-hidden mb-8 shadow-inner">
+            <div className="w-full h-3 bg-blue-900 rounded-full overflow-hidden mb-6 shadow-inner">
               <div
                 className="h-full bg-blue-400 transition-all duration-300"
                 style={{ width: `${(step / (steps.length - 1)) * 100}%` }}
               />
             </div>
-          </>
+          </div>
         )}
         
         {/* Current step */}
-        <div className="bg-blue-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10">
-          {steps[step]}
+        <div className="flex-grow flex items-center justify-center">
+          <div className="bg-blue-900 bg-opacity-30 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-white border-opacity-10 w-full">
+            {steps[step]}
+          </div>
         </div>
-        
+
         {/* Navigation buttons with Restart, hidden on landing page */}
         {step > 0 && (
-          <div className="flex justify-between items-center mt-8">
-            <button onClick={() => setStep(step - 1)} className="px-6 py-3 bg-white text-blue-800 rounded-full shadow-lg">Back</button>
-            <button onClick={() => window.location.reload()} className="px-6 py-3 bg-red-500 text-white rounded-full shadow-lg">↺ Restart</button>
-            {step < steps.length - 1 && (<button onClick={() => setStep(step + 1)} className="px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg">Next</button>)}
+          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center mt-6 space-y-2 sm:space-y-0 sm:space-x-4">
+            <button onClick={() => setStep(step - 1)} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-white text-blue-800 rounded-full shadow-lg">Back</button>
+            <button onClick={() => window.location.reload()} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-red-500 text-white rounded-full shadow-lg">↺ Restart</button>
+            {step < steps.length - 1 && (
+              <button onClick={() => setStep(step + 1)} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-blue-600 text-white rounded-full shadow-lg">Next</button>
+            )}
           </div>
         )}
       </div>
