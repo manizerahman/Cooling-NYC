@@ -734,7 +734,7 @@ const CoolingNYCApp = () => {
     </div>,
 
     // Final Plan
-    <FinalPlan key="final" formData={formData} resourceData={resourceData} isLoading={isLoading} error={error} />
+    <FinalPlan key="final" formData={formData} resourceData={resourceData} isLoading={isLoading} error={error} setStep={setStep} />
   ];
 
   // If we're on the landing step, render it exclusively to avoid extra layout and scrolling
@@ -769,11 +769,11 @@ const CoolingNYCApp = () => {
 
         {/* Navigation buttons with Restart, hidden on landing page */}
         {step > 0 && (
-          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center mt-6 w-full space-y-2 sm:space-y-0 sm:space-x-4">
-            <button onClick={() => setStep(step - 1)} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-white text-blue-800 rounded-full shadow-lg">Back</button>
-            <button onClick={() => window.location.reload()} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-red-500 text-white rounded-full shadow-lg">↺ Restart</button>
+          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center mt-6 w-full space-y-4 sm:space-y-0 sm:space-x-4">
+            <button onClick={() => setStep(step - 1)} className="px-8 py-4 w-full sm:w-auto text-base bg-white text-blue-900 rounded-full shadow-lg transition-colors duration-200 ease-in-out hover:bg-blue-200">Back</button>
+            <button onClick={() => window.location.reload()} className="px-4 py-4 sm:px-6 sm:py-3 w-full sm:w-auto text-base bg-red-500 text-white rounded-full shadow-lg hover:shadow-xl hover:bg-red-600 active:shadow-inner active:scale-95 transition-transform duration-150">↺ Restart</button>
             {step < steps.length - 1 && (
-              <button onClick={() => setStep(step + 1)} className="px-4 py-2 sm:px-6 sm:py-3 w-full sm:w-auto text-sm sm:text-base bg-blue-600 text-white rounded-full shadow-lg">Next</button>
+              <button onClick={() => setStep(step + 1)} className="px-4 py-4 sm:px-6 sm:py-3 w-full sm:w-auto text-base bg-blue-600 text-white rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 active:shadow-inner active:scale-95 transition-transform duration-150">Next</button>
             )}
           </div>
         )}
@@ -815,7 +815,7 @@ const ResourceCard = ({ title, resource, language }) => {
 };
 
 // Final Plan component
-function FinalPlan({ formData, resourceData, isLoading, error }) {
+function FinalPlan({ formData, resourceData, isLoading, error, setStep }) {
   const { name, zip, temperature, temperatureUnit, income, address, legalHelp, landlordHelp } = formData;
   
   // Get the current language
@@ -863,7 +863,7 @@ function FinalPlan({ formData, resourceData, isLoading, error }) {
         </ul>
         <button 
           className="px-5 py-2 bg-white text-blue-800 rounded-full mt-4" 
-          onClick={() => window.history.back()}
+          onClick={() => setStep(2)}
         >
           {translate("goBack")}
         </button>
@@ -1052,7 +1052,12 @@ ${name || "Resident"}`;
 
       {legalHelp && legalHelp !== "No" && (
         <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
-          <h3 className="font-semibold text-lg">{translate("legalSupportTitle")}</h3>
+          <div className="flex justify-between items-center">
+            <h3 className="font-semibold text-lg">{translate("legalSupportTitle")}</h3>
+            <button onClick={() => navigator.clipboard.writeText(getLegalLetterContent())} className="text-white hover:text-blue-200">
+              📋 Copy
+            </button>
+          </div>
           <textarea
             className="w-full p-4 mt-2 text-black bg-gray-100 rounded-lg shadow-inner"
             rows={6}
@@ -1063,7 +1068,12 @@ ${name || "Resident"}`;
       )}
       {landlordHelp === true && (
         <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
-          <h3 className="font-semibold text-lg">{translate("landlordLetterTitle")}</h3>
+          <div className="flex justify-between items-center">
+            <h3 className="font-semibold text-lg">{translate("landlordLetterTitle")}</h3>
+            <button onClick={() => navigator.clipboard.writeText(getLandlordLetterContent())} className="text-white hover:text-blue-200">
+              📋 Copy
+            </button>
+          </div>
           <textarea
             className="w-full p-4 mt-2 text-black bg-gray-100 rounded-lg shadow-inner"
             rows={6}
