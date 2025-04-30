@@ -446,6 +446,7 @@ const CoolingNYCApp = () => {
   const [resourceData, setResourceData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [fallbackAdvocacy, setFallbackAdvocacy] = useState({});
   const [validationError, setValidationError] = useState("");
   const [showLovedOnesOptions, setShowLovedOnesOptions] = useState(false);
   const particles = useMemo(() => {
@@ -495,6 +496,22 @@ const CoolingNYCApp = () => {
     };
 
     loadData();
+  }, []);
+
+  // Load fallback advocacy orgs
+  useEffect(() => {
+    const loadFallback = async () => {
+      try {
+        const resp = await fetch(`/Advocacy Orgs.json?t=${new Date().getTime()}`);
+        if (resp.ok) {
+          const data = await resp.json();
+          setFallbackAdvocacy(data);
+        }
+      } catch (err) {
+        console.error("Error loading fallback advocacy orgs:", err);
+      }
+    };
+    loadFallback();
   }, []);
 
   // Form handlers
@@ -636,8 +653,8 @@ const CoolingNYCApp = () => {
 
     // Mediation Support
     <div key="mediation" className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">{translate("advocacyTitle")}</h2>
-      <h3 className="text-lg text-white">{translate("landlordTitle")}</h3>
+      <h2 className="text-2xl font-bold text-white">Do you need landlord mediation support or legal assistance?</h2>
+      <h3 className="text-lg text-white">Generate a letter to send to your landlord</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[
           { value: true, label: translate("yesNeedLetter"), icon: "✉️" },
@@ -653,7 +670,7 @@ const CoolingNYCApp = () => {
           />
         ))}
       </div>
-      <h3 className="text-lg text-white">{translate("legalHelpTitle")}</h3>
+      <h3 className="text-lg text-white">How much are you able/willing to pay for legal assistance?</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
         {[
           { value: "Pro bono", label: translate("proBono"), icon: "⚖️" },
@@ -677,7 +694,7 @@ const CoolingNYCApp = () => {
 
     // Advocacy
     <div key="advocacy" className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">{translate("advocacyTitle")}</h2>
+      <h2 className="text-2xl font-bold text-white">Do you want to support others during extreme heat in NYC?</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
         {[
           { value: "unit", key: "unitOption", icon: "🏠" },
@@ -734,7 +751,7 @@ const CoolingNYCApp = () => {
     </div>,
 
     // Final Plan
-    <FinalPlan key="final" formData={formData} resourceData={resourceData} isLoading={isLoading} error={error} setStep={setStep} />
+    <FinalPlan key="final" formData={formData} resourceData={resourceData} isLoading={isLoading} error={error} setStep={setStep} fallbackAdvocacy={fallbackAdvocacy} />
   ];
 
   // If we're on the landing step, render it exclusively to avoid extra layout and scrolling
@@ -815,7 +832,7 @@ const ResourceCard = ({ title, resource, language }) => {
 };
 
 // Final Plan component
-function FinalPlan({ formData, resourceData, isLoading, error, setStep }) {
+function FinalPlan({ formData, resourceData, isLoading, error, setStep, fallbackAdvocacy }) {
   const { name, zip, temperature, temperatureUnit, income, address, legalHelp, landlordHelp } = formData;
   
   // Get the current language
@@ -893,8 +910,13 @@ function FinalPlan({ formData, resourceData, isLoading, error, setStep }) {
   // Extract resources from the data
   const coolingCenters = zipResources["Cooling Centers"] || [];
   const legalAidClinics = zipResources["Legal Aid Clinics"] || [];
-  const advocacyOrgs = zipResources["Advocacy Organizations"] || [];
+  const rawAdvocacyOrgs = zipResources["Advocacy Organizations"] || [];
+  const advocacyOrgs = rawAdvocacyOrgs.length > 0 ? rawAdvocacyOrgs : (fallbackAdvocacy[zip] || []);
   const retailers = zipResources["Retailers"] || [];
+  
+  // Dedupe and limit to 3 entries
+  const uniqueLegalAidClinics = Array.from(new Map(legalAidClinics.map(c => [c.name, c])).values()).slice(0, 3);
+  const uniqueAdvocacyOrgs = advocacyOrgs.slice(0,3);
   
   console.log("Cooling Centers:", coolingCenters);
   console.log("Legal Aid Clinics:", legalAidClinics);
@@ -950,7 +972,7 @@ ${name || "Resident"}`;
 
   return (
     <div className="space-y-6 text-white">
-      <h2 className="text-2xl font-bold">{translate("finalPlanTitle")} {name || "You"}</h2>
+      <h2 className="text-2xl font-bold">Personalized Cooling Plan for {name || "You"}</h2>
 
       {/* Health Warning */}
       <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
@@ -1011,9 +1033,9 @@ ${name || "Resident"}`;
       {/* Legal Aid Clinics */}
       <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
         <h3 className="font-semibold text-lg mb-2">{translate("legalAidTitle")} {zip}</h3>
-        {legalAidClinics.length > 0 ? (
+        {uniqueLegalAidClinics.length > 0 ? (
           <div className="space-y-2">
-            {legalAidClinics.slice(0,3).map((clinic, idx) => (
+            {uniqueLegalAidClinics.map((clinic, idx) => (
               <ResourceCard key={idx} title={clinic.name} resource={clinic} language={currentLanguage} />
             ))}
           </div>
@@ -1025,9 +1047,9 @@ ${name || "Resident"}`;
       {/* Advocacy Organizations */}
       <div className="bg-blue-800 bg-opacity-50 p-5 rounded-xl shadow-lg border border-blue-200 border-opacity-20">
         <h3 className="font-semibold text-lg mb-2">{translate("advocacyOrgsTitle")} {borough}</h3>
-        {advocacyOrgs.length > 0 ? (
+        {uniqueAdvocacyOrgs.length > 0 ? (
           <div className="space-y-2">
-            {advocacyOrgs.map((org, idx) => (
+            {uniqueAdvocacyOrgs.map((org, idx) => (
               <ResourceCard key={idx} title={org.name} resource={org} language={currentLanguage} />
             ))}
           </div>
